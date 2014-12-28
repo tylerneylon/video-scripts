@@ -1,6 +1,6 @@
 # Learn Lua in an Hour
 
-## Part 1
+## 1 - Introduction
 
 Hey everybody - this is Tyler. I'm going to try to teach you Lua in about an hour.
 
