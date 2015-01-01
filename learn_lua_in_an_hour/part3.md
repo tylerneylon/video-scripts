@@ -43,6 +43,13 @@ representation internally.
 
 goal: 44s
 
+The built-in `tonumber` function converts numbers and strings to numbers.
+
+    > = tonumber('2.7')
+    2.7
+
+goal: 49s
+
 Lua **strings** are immutable. You can use single- or double-quotes to type a
 literal. There's no big difference between the two.
 
@@ -74,12 +81,20 @@ escaped characters, and end as soon as they see two closing square brackets.
     two
     three
 
-goal: 86s
+goal: 91s
+
+The built-in `tostring` function returns a reasonable
+string representation of any value.
+
+    > = tostring(true)
+    true
+
+goal: 96s
 
 **Tables** are key-value maps, and Lua's only container type.
 I'll cover tables later in the video.
 
-goal: 92s
+goal: 102s
 
 The **nil** value conceptually means no value.
 Undefined variables evaluate to `nil`; this might be a
@@ -99,6 +114,39 @@ but the garbage collector is always running automatically for you.
 
     > collectgarbage()
 
-goal: 112s
+goal: 122s
+
+**Functions** can be assigned to variables and passed in and out of
+other functions. I'll talk more about functions later in the video.
+
+    > fn = function (x) return x*x end
+    > = fn(3)
+    9
+
+goal: 131s
+
+<!-- <userdata & thread> -->
+
+**Userdata** and **threads** are slightly advanced types that
+I won't cover in detail now.
+A userdata object is basically a black-box type used by libraries
+to wrap C-level structs.
+
+    > f = io.open('file', 'w')
+    > = type(f)
+    userdata
+
+A thread is an instance of a coroutine.
+
+goal: 148s
+
+Assignments are global by default.
+Use `local` to make them local.
+
+    > local a = 7
+
+goal: 153s
+
+
 
 
