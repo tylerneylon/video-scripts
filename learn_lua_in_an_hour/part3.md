@@ -36,10 +36,8 @@ or in hex.
     16
 
 In Lua 5.2 and earlier, numbers are represented internally as 64-bit doubles
-unless you're working with a specially-compiled 32-bit version of Lua, which
-is unusual.
-Lua 5.3 still has a single number type, but it can also use a pure integer
-representation internally.
+by default. Lua 5.3 still has a single number type, but it can internally use
+either an integer or a double representation.
 
 goal: 44s
 
