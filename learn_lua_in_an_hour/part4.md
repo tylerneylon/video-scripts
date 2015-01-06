@@ -83,3 +83,42 @@ it doesn't even bother to evaluate the rest of the expressions, like that:
     > = false and print('hi')
     false
 
+I'll quickly mention how you can work with binary operators.
+Lua 5.2 has a module called `bit32` module which offers them as functions.
+Lua 5.3 actually adds these operators to the language itself.
+
+Lua supports assignments with multiple variables on the left and
+multiple expressions on the right.
+
+    > a, b = 1, 2
+    > = a
+    1
+    > = b
+    2
+
+Lua performs this operation by first
+evaluating everything on the right, putting it on a stack, and *then*
+making the assignments to the left-hand side.
+
+
+    > a, b = b, a
+    > = a
+    2
+    > = b
+    1
+
+This is important because it enables things like the swap operation
+I just performed.
+
+If there are more variables on the left than on the right,
+the extra variables become `nil`.
+
+    > a, b, c = 1, 2
+    > = c
+    nil
+
+If there are more expressions on the right-hand side, then everything
+is evaluated, but the extra expressions are thrown away.
+
+    > a = 1, 2
+
