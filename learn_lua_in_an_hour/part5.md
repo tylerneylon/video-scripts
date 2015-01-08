@@ -41,4 +41,52 @@ table, that will be an error:
 
 <!-- 5.3 tables: getting and setting general keys -->
 
+Lua also has a square-bracket notation which allows me to use
+arbitrary Lua expressions as keys.
+
+    > = t['abc']
+    12
+
+Here's an example of a number as a key via the variable `a`:
+
+    > a = 12
+    t[a] = 34
+
+Here's an example of a table as a key:
+
+    > t[t] = 56
+
+Here's an example of a function as a value:
+
+    > t[1] = print
+
+I can call the function like this:
+
+    > t[1]('hi')
+    hi
+
+<!-- 5.4 tables: literals -->
+
+Lua also has a syntax to specify non-empty tables.
+In this case, I'm creating a table with the keys `abc` and `def`:
+
+    > u = {abc = 12, def = 34}
+    > = u.abc
+    12
+
+This syntax works by treating the left-hand side as a string key;
+it has to be an identifier.
+The right-hand side is an arbitrary Lua expression.
+Here's an example with a function on the right-hand side:
+
+    > u = {pr = print}
+    > u.pr('yo')
+    yo
+
+If you want to specify non-identifiers as keys, you can use
+a square-bracket notation like this:
+
+    > v = {[34] = 1, [true] = 2}
+    > = v[true]
+    2
 
