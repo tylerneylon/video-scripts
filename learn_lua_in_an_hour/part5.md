@@ -90,3 +90,49 @@ a square-bracket notation like this:
     > = v[true]
     2
 
+<!-- 5.5 tables: arrays -->
+
+If a table has consecutive number keys starting at 1, then
+it's called an *array*. Arrays aren't a new type - they're
+just tables with a specific key structure.
+In Lua syntax, I can specify an array by omitting the `=`'s
+in the table literal:
+
+    > arr = {2, 3, 5, 7}
+
+This is the first 4 prime numbers.
+When I use this syntax, Lua assigns keys as numbers starting
+at 1 and increasing from there.
+
+    > = arr[1]
+    2
+    > = arr[2]
+    3
+
+I can use the hash operator to see the size of an array:
+
+    > = #arr
+    4
+
+<!-- 5.6 tables: equality -->
+
+Tables in Lua are considered equal only if they're identical.
+
+    > = t == t
+    true
+
+It is *not* enough for their contents to be the same, like this:
+
+    > a = {}
+    > b = {}
+    > = a == b
+    false
+
+In other words, the expressions being compared have to evaluate to
+literally the same table.
+
+    > a = b
+    > = a == b
+    true
+
+<!-- 5.7 print -->
