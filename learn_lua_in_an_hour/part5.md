@@ -136,3 +136,16 @@ literally the same table.
     true
 
 <!-- 5.7 print -->
+
+We've already been using the built-in `print` function.
+
+    > print('hi')
+    hi
+
+This function takes a variable number of parameters, it calls `tostring`
+on each of those parameters, joins them with tab characters,
+adds a newline to the end, and sends that all to standard out.
+
+    > print(1, 2, false, nil, {})
+    1       2       false   nil      table: 0x7fc448f038e0
+
