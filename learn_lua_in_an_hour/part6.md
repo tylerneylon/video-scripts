@@ -97,3 +97,44 @@ That means the function, considered as a variable, only has local scope.
 
 This is useful when you're writing a module and you want to call an
 internal function that isn't visible outside the scope of the module.
+
+<!-- 6.5 functions: closures -->
+
+Let's take a look at an example of a *closure*.
+I'm going to define a function called `adder` which takes a number called
+`x` and returns an anonymous function which adds a new number `y` and `x`.
+
+    -- In the file fn.lua:
+
+    function adder(x)
+      return function (y)
+        return x + y
+      end
+    end
+
+I'll load these into Lua:
+
+    > dofile('fn.lua')
+
+Now I can make a new variable called `add1` which is the return value of
+`adder(1)`:
+
+    > add1 = adder(1)
+
+and `add30` which is the return value of `adder(30)`:
+
+    > add30 = adder(30)
+
+These are different functions, and when I call them with the same input,
+say 12, I'll get different outputs:
+
+    > = add1(12)
+    13
+    > = add30(12)
+    42
+
+The important thing here is that each of these functions has its own
+private copy of the variable `x` with a different value.
+If closures are new to you, this is a basic example
+to see the general idea.
+
