@@ -79,3 +79,49 @@ It's only been compiled so far. I can call `f` to run the chunk:
     > f()
     hi
 
+<!-- 7.4 Comments -->
+
+Lua has two types of comments - single-line and multi-line.
+To illustrate that, I'll create a new Lua file.
+Here is a regular Lua statement:
+
+    -- In the file comments.lua:
+
+    print('string 1')
+
+If at any point, Lua sees two hyphens, then the rest of that line
+is a comment.
+
+    -- Adding to the previous line in comments.lua:
+
+    print('string 1') -- print('string 2')
+
+To start a multiline comment, you need to use two hyphens followed by
+two open square brackets.
+To show that this is in fact a multiline comment, I'm going to put
+in multiple lines:
+
+    -- Appending in the file comments.lua:
+
+    --[[
+      print('string 3')
+      print('string 4')
+    --]]
+
+We'll see that they're not executed.
+
+To show that this is the end [of the comment block], and that
+they're executed again, I'll create another statement:
+
+    -- Appending in the file comments.lua:
+
+    print('string 5')
+
+When I run this, we should only see strings 1 and 5 printed out
+because the rest are commented.
+
+    > dofile('comments.lua')
+    string 1
+    string 5
+
+There you go!
