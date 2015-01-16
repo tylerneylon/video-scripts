@@ -35,4 +35,47 @@ and the return value `r` has been received from the file:
     > = r
     w00t
 
+<!-- 7.2 Chunks in the interpreter -->
+
+Any code executed in the interpreter is compiled as a chunk.
+
+This means that variables declared as `local` aren't visible in the
+next chunk, like this:
+
+    > local x = 64
+    > = x
+    nil
+
+They *are* visible within the same chunk, though:
+
+    > local x = 64; print(x)
+    64
+
+The semicolon, by the way, is an optional line separator in Lua.
+
+I can also return values from an interpreter line, like this:
+
+    > return 1, 2, 3
+    1    2    3
+
+The default action of the interpreter is to print out
+the return values.
+
+<!-- 7.3 The built-in load[string] function -->
+
+In Lua 5.2 and later, there's a nice built-in function called `load`
+which accepts a string, compiles it as a Lua chunk, and returns a
+function you can call to execute that chunk.
+In Lua 5.1, which I'm using here, you want to call `loadstring`
+to perform the same action.
+
+Here is an example:
+
+    > f = loadstring('print("hi")')
+
+Notice that my code hasn't run yet.
+It's only been compiled so far. I can call `f` to run the chunk:
+
+    > f()
+    hi
 
