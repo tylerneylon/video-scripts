@@ -104,3 +104,39 @@ It'll print the first number, and this will stop as soon as the keyword
 
     > for i = 1, 10 do print(i) break end
     1
+
+<!-- 7.4 Repeat-until loops -->
+
+Lua also has a repeat-until loop which is like a do-while loop.
+The syntax is to begin with the keyword `repeat`, followed by a block
+of statements, the keyword `until`,
+and then an ending condition.
+
+    -- In the file repeat.lua:
+
+    i = 1
+    repeat
+      print(i)
+      i = i + 1
+    until i == 6
+
+We can confirm that this prints out 1 through 5 by running the script:
+
+    > dofile('repeat.lua')
+    1
+    2
+    3
+    4
+    5
+
+There you go!
+
+<!-- 7.5 The goto statement -->
+
+Lua 5.2 added the `goto` statement.
+I'm not going to cover that in detail in this video.
+
+In my experience, the vast majority of code works well
+with the loop constructs we've already covered - not using `goto`;
+although, I also feel that, in rare cases, a `goto` is
+the best control flow mechanism to use.
