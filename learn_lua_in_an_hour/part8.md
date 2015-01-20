@@ -1,6 +1,6 @@
 ## 8 - Loops
 
-<!-- 7.1 While loops -->
+<!-- 8.1 While loops -->
 
 Lua has several loop constructs.
 I'll start by looking at the `while` loop.
@@ -33,7 +33,7 @@ To verify that, I'll run the script:
     9
     10
 
-<!-- 7.2 For loops -->
+<!-- 8.2 For loops -->
 
 Let's talk about for loops.
 
@@ -95,7 +95,7 @@ minutes,
 the `pairs` and `ipairs` functions,
 which are the most useful iterators that Lua comes with.
 
-<!-- 7.3 The break statement -->
+<!-- 8.3 The break statement -->
 
 Lua includes a `break` statement, but *not* a `continue` statement.
 I'll give you an example of `break`.
@@ -105,7 +105,7 @@ It'll print the first number, and this will stop as soon as the keyword
     > for i = 1, 10 do print(i) break end
     1
 
-<!-- 7.4 Repeat-until loops -->
+<!-- 8.4 Repeat-until loops -->
 
 Lua also has a repeat-until loop which is like a do-while loop.
 The syntax is to begin with the keyword `repeat`, followed by a block
@@ -131,7 +131,7 @@ We can confirm that this prints out 1 through 5 by running the script:
 
 There you go!
 
-<!-- 7.5 The goto statement -->
+<!-- 8.5 The goto statement -->
 
 Lua 5.2 added the `goto` statement.
 I'm not going to cover that in detail in this video.
