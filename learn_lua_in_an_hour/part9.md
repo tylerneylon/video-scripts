@@ -44,3 +44,25 @@ in the underscore variable.
     false
 
 <!-- 9.2 ipairs -->
+
+The `ipairs` function works with arrays, so I'll define an
+array with some Fibonacci numbers in it.
+
+    > arr = {1, 1, 2, 3, 5, 8}
+
+The syntax to use `ipairs` is the same as `pairs`, like this:
+
+    > for k, v in ipairs(arr) do print(k, v) end
+    1       1
+    2       1
+    3       2
+    4       3
+    5       5
+    6       8
+
+The difference is that `ipairs` expects its input table to
+be an array, and that it iterates over keys in order starting
+from 1.
+
+To summarize, use `ipairs` to iterate over an array that needs
+to be processed in order; otherwise use `pairs`.
