@@ -26,7 +26,7 @@ any two given two-dimensional vectors
 I can reuse the `norm` function
 to help me with that calculation, like this.
 
-Remember that chunks are compiled as the body of a funciton,
+Remember that chunks are compiled as the body of a function,
 so a good way to get the `vec` table out
 is to return the value.
 
