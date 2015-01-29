@@ -86,4 +86,36 @@ return the useful return values:
 
 <!-- 13.3 the pcall function -->
 
+The built-in `pcall` function makes *protected* function
+calls.
+It basically wraps a call to catch exceptions.
+
+You use it by first sending in the function that you want to call
+followed by parameters that you want to give to it.
+
+    > =pcall(print, 'a good call')
+    a good call
+    true
+
+It calls the function with the given parameters.
+The first return value is going to be a boolean indicating
+success or failure. The others
+are either going to be the called function's return values,
+or an error message if an exception was thrown.
+
+I'll give an example of a case where an exception is thrown.
+
+    > = pcall(io.write, false)
+    false    bad argument #1 to '?' (string expected, got boolean)
+
+In summary, `pcall` converts exception-like errors
+into return-value errors.
+I like to think of it as a sort of inverse of the
+`assert` function.
+
 <!-- 13.4 the xpcall function -->
+
+There's another built-in function called `xpcall` which
+offers basically the same functionality as `pcall`, except
+that one of its input parameters is a callback function
+to handle exception-like errors.
