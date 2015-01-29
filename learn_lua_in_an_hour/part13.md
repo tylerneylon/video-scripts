@@ -36,3 +36,54 @@ the interpreter will catch it and print `my error msg`.
     stdin:1: my error msg
     stack traceback:
         <other stuff here>
+
+<!-- 13.2 the assert function -->
+
+The built-in `assert` function accepts as input a boolean
+and an error message.
+It throws the error message if the boolean is false, like this:
+
+    > cond = false
+    > = assert(cond, 'ruh-roh')
+    stdin:1: ruh-roh
+    stack traceback:
+        <other stuff here>
+
+However, if the condition is true, then it simply returns
+the inputs it receives.
+
+    > cond = true
+    > return assert(cond, 'ruh-roh')
+    true    ruh-roh
+    -- Editor's note: the "return" acts the same as an =.
+
+A common pattern in Lua, for functions that return error
+messages, is to first return a boolean indicating success or
+failure, followed by, in the success case, the useful return
+values; or in the failure case, an error message.
+
+`assert` works well with this pattern.
+I'll demonstrate by creating two functions that return
+success or failure depending on which one I call.
+
+    > funciton bad() return false, 'was bad' end
+    > function good() return true, 42 end
+
+And we'll see that
+`assert` easily wraps these function calls.
+In this case it'll throw the error message:
+
+    > = assert(bad())
+    stdin:1: was bad
+    stack traceback:
+        <other stuff here>
+
+And in this case - the good case - it will simply
+return the useful return values:
+
+    > = assert(good())
+    true    42
+
+<!-- 13.3 the pcall function -->
+
+<!-- 13.4 the xpcall function -->
