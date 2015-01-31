@@ -49,7 +49,7 @@ You can find the square root of a number using the
     > = math.sqrt(2)
     1.4142135623731
 
-The `math.random` function behaves differenctly
+The `math.random` function behaves differently
 depending on the number of inputs it receives.
 With no inputs, it returns a pseudorandom float
 between 0 and 1. It can equal 0, but is always
