@@ -78,4 +78,45 @@ work in radians. Pi is available as `math.pi`.
     > = math.pi
     3.1415926535898
 
-<!-- 14.3 the math module -->
+<!-- 14.3 the string module -->
+
+Now for some functions in the `string` module.
+
+The `string.sub` function returns the substring of its
+first input between two indices given as parameters.
+Here's an example:
+
+    > str = "pancakes"
+    > = string.sub(str, 4, 7)
+    cake
+
+Both endpoints are included. In this example, "c"
+is the 4th letter and "e" is the 7th.
+
+You can also use `string.sub` as a method call with
+the colon syntax, like this:
+
+    > = str:sub(1, 3)
+    pan
+
+Remember that Lua strings are arbitrary byte sequences.
+The `string.byte` function returns the numeric
+value of a byte within a string like this:
+
+    > = string.byte(str, 2)
+    97  -- Editor's note: 97 is the decimal ascii value of 'a'.
+
+Again, you call it as a method call using colon syntax
+like this:
+
+    > = str:byte(2)
+    97
+
+The `string.format` function works like the `printf` function
+found in many other languages. Here's an example:
+
+    > = string.format("I eat %s %d times a day", str, 3)
+    I eat pancakes 3 times a day
+
+I won't cover Lua's format specifiers in detail, but they
+are mostly the same as those in C.
