@@ -46,15 +46,15 @@ function, like this:
 
 <!-- 15.3 delegating gets -->
 
-Let's change the behavior of `t` by providing a backup
-table for key lookups that fail in `t` itself.
+Let's change the behavior of `t` by providing a backup table.
+If a key isn't in `t`, Lua will look for it in the backup.
 
     > backup = {mykey = 100}
     > meta.__index = backup
     > = t.mykey
     100
 
-The `__index` key in a metatable is known to Lua as
+`__index`, as a key in a metatable, is known to Lua as
 providing a way to handle failed key lookups. If the
 `__index` value is another table, then Lua will use
 that other table as a backup location to find
@@ -106,3 +106,13 @@ our `__newindex` function:
 This `__newindex` functionality lets us make things like
 read-only tables, proxy tables, or tables that take action on
 every data access to them.
+
+<!-- 15.5 rawget and rawset -->
+
+There are two built-in functions called `rawget` and `rawset`
+which can access a table's data while ignoring its metatable.
+
+    > -- rawget, rawset
+
+I won't cover these functions in detail, but I wanted to let
+you know they exist.
