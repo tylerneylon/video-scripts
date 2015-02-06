@@ -82,9 +82,9 @@ sequence of square numbers.
 First I'll type out a constructor, then I'll use it,
 and then I'll explain what each line does.
 
-    > Sequence = {}
+    >  Sequence = {}
     >  function Sequence:new()
-    >>   new_seq = {last_num = 0}
+    >>   local new_seq = {last_num = 0}
     >>   self.__index = self
     >>   return setmetatable(new_seq, self)
     >> end
