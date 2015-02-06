@@ -110,9 +110,19 @@ we can't actually do anything yet with the instance.
 Let's change that by defining a couple methods on
 the class.
 
+The `next` method returns the next number in the
+sequence. It doesn't change the state of any
+variables, though.
+
     >  function Sequence:next()
     >>   return self.last_num + 2
     >> end
+
+The `forward` method does change the state of
+the sequence by moving forward a given number
+of steps. It calls the `next` method to find out
+which number is next as it takes each step.
+
     >  funciton Sequence:forward(n)
     >>   for i = 1, n do
     >>     self.last_num = self:next()
@@ -129,9 +139,6 @@ like this:
     6
     8
     10
-
-You might want to pause the video to consider how
-the `self` values and use of colon syntax works out.
 
 <!-- 16.5 inheritance -->
 
@@ -153,13 +160,15 @@ Let's do that for square numbers.
     >> end
 
 `Squares` is a subclass, so it may be surprising to see
-that it begins life as an instance of `Sequence`. But
-this is a nice way to implement inheritance in Lua.
+that it begins life as an instance of `Sequence`. This
+is actually a nice way to implement inheritance in Lua.
 It works because classes and instances are all just
 tables, and instance behavior is based entirely on
-metatables.
+metatables. In a minute I'll show a diagram that
+illustrates the relationship between the `Square`
+and `Sequence` tables.
 
-Here is how we can use this subclass:
+Here is how we can use the `Square` subclass:
 
     > sq = Squares:new()
     > sq:forward(5)
@@ -169,13 +178,52 @@ Here is how we can use this subclass:
     16
     25
 
-It might be useful to pause the video to see how the
-constructor behaves in the call to `Squares:new`.
-The constructor treats `Squares` as `self` instead
-of `Sequence`, which is critical for this subclass
-pattern. The result is that the `sq` instance has
-`Squares` as a metatable. Calls to `self:next`,
-will call the version of `next` in `Squares` instead
-of the version in `Sequence`.
+Yay, it works.
 
-<!-- Note to self: a slide here might be useful -->
+Now let's take a look at a class diagram.
+
+<!-- switch to slide view -->
+
+This focuses on the three tables `sq`, `Squares`,
+and `Sequence`.
+
+We're thinking of `Sequence` and `Squares` as
+classes because they have a constructor and the
+`forward` and `next` methods.
+
+When we look up a key on `sq`, Lua will use the first
+value it finds in the metatable chain. So calling
+`sq:next` will call the `next` method associated with
+`Squares` and not the one associated with `Sequence`.
+
+<!-- next slide -->
+
+It's interesting to carefully consider a call to
+`sq:forward`, because somehow the `forward` method
+has to know to call the version of `next` in
+`Squares` and not the version in `Sequence`.
+
+<!-- next slide -->
+
+First, Lua finds the `forward` key defined in
+`Sequence` by looking up the metatable chain.
+
+<!-- next slide -->
+
+Then `forward` makes a call to `self:next`.
+
+What is the value of `self`? It's set to `sq`.
+So when `forward` calls `self:next`,
+Lua again begins the lookup starting at the bottom
+of the metatable chain, with `sq` itself.
+
+So any methods defined in `Squares` get to override
+methods defined in superclasses like `Sequence`.
+
+This is how single inheritance works in Lua.
+
+It's also possible to use multiple inheritance in Lua,
+which is where a class may have more than one
+immediate superclass. I won't cover this in detail,
+but I'll mention that the key is to use a function
+as a metatable's `__index` value instead of a table.
