@@ -53,7 +53,7 @@ instead of a period inserts a first input parameter called
 
     > function t:g() print(self.mynum) end
 
-So `g` and `f` are the same.
+So `g` and `f` are essentially the same.
 
 When you call a function in a table, using a colon inserts
 the table as the first parameter value passed to the function.
@@ -123,7 +123,7 @@ the sequence by moving forward a given number
 of steps. It calls the `next` method to find out
 which number is next as it takes each step.
 
-    >  funciton Sequence:forward(n)
+    >  function Sequence:forward(n)
     >>   for i = 1, n do
     >>     self.last_num = self:next()
     >>     print(self.last_num)
@@ -188,13 +188,15 @@ This focuses on the three tables `sq`, `Squares`,
 and `Sequence`.
 
 We're thinking of `Sequence` and `Squares` as
-classes because they have a constructor and the
-`forward` and `next` methods.
+classes because they have access to a constructor and
+the `forward` and `next` methods.
 
 When we look up a key on `sq`, Lua will use the first
 value it finds in the metatable chain. So calling
 `sq:next` will call the `next` method associated with
-`Squares` and not the one associated with `Sequence`.
+`Squares` and not the one associated with `Sequence`,
+even though `forward` itself is defined in the
+`Sequence` table.
 
 <!-- next slide -->
 
@@ -225,5 +227,5 @@ This is how single inheritance works in Lua.
 It's also possible to use multiple inheritance in Lua,
 which is where a class may have more than one
 immediate superclass. I won't cover this in detail,
-but I'll mention that the key is to use a function
+but I'll mention that the key idea is to use a function
 as a metatable's `__index` value instead of a table.
