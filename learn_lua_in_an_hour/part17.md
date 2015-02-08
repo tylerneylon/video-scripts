@@ -117,7 +117,7 @@ A very insecure graphing calculator.
 
 But, a graphing calculator nonetheless.
 
-I have not yet written the function `range_maker`.
+I have not yet written the function `range_mapper`.
 But I will.
 
 That function gives us exactly a linear mapping between
