@@ -231,6 +231,12 @@ a {
   text-shadow: 0 0 5px rgba(104, 182, 255, 0.5);
 }
 
+h1 a {
+  text-decoration: none;
+  text-shadow: none;
+  color: #B5E853;
+}
+
 /* Clearfix */
 
 .cf:before, .cf:after {
@@ -245,3 +251,4 @@ a {
 .cf {
   zoom:1;
 }
+
