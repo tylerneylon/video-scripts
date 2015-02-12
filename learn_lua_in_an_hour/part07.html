@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Video Scripts by tylerneylon</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <a href="index.html"><h1>Learn Lua in an Hour</h1></a>
+        <h2>Chunks and comments</h2>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+<!-- 7.1 Chunks as files -->
+
+<p>The word <em>chunk</em> in Lua means any block of statements that are
+compiled as a unit.
+The most obvious example is a Lua file.
+I'll create a new file to demonstrate.</p>
+<p>Chunks are always treated as the body of a function, which
+has two consequences.
+First, local variables are not visible outside the chunk.
+Second, you can return values, which stops the execution of the chunk.</p>
+<pre><code>-- In the file example.lua:
+
+local x = 1
+y = 2
+return 'w00t'
+</code></pre>
+<p>In the interpreter, I'll use the built-in <code>dofile</code> function to
+execute the script I just wrote.
+The global <code>x</code> is left undefined since it was a <code>local</code> in the file:</p>
+<pre><code>&gt; = x
+nil
+</code></pre>
+<p>The global <code>y</code> <em>is</em> defined:</p>
+<pre><code>&gt; = y
+2
+</code></pre>
+<p>and the return value <code>r</code> has been received from the file:</p>
+<pre><code>&gt; = r
+w00t
+</code></pre>
+<!-- 7.2 Chunks in the interpreter -->
+
+<p>Any code executed in the interpreter is compiled as a chunk.</p>
+<p>This means that variables declared as <code>local</code> aren't visible in the
+next chunk, like this:</p>
+<pre><code>&gt; local x = 64
+&gt; = x
+nil
+</code></pre>
+<p>They <em>are</em> visible within the same chunk, though:</p>
+<pre><code>&gt; local x = 64; print(x)
+64
+</code></pre>
+<p>The semicolon, by the way, is an optional line separator in Lua.</p>
+<p>I can also return values from an interpreter line, like this:</p>
+<pre><code>&gt; return 1, 2, 3
+1    2    3
+</code></pre>
+<p>The default action of the interpreter is to print out
+the return values.</p>
+<!-- 7.3 The built-in load[string] function -->
+
+<p>In Lua 5.2 and later, there's a nice built-in function called <code>load</code>
+which accepts a string, compiles it as a Lua chunk, and returns a
+function you can call to execute that chunk.
+In Lua 5.1, which I'm using here, you want to call <code>loadstring</code>
+to perform the same action.</p>
+<p>Here is an example:</p>
+<pre><code>&gt; f = loadstring('print("hi")')
+</code></pre>
+<p>Notice that my code hasn't run yet.
+It's only been compiled so far. I can call <code>f</code> to run the chunk:</p>
+<pre><code>&gt; f()
+hi
+</code></pre>
+<!-- 7.4 Comments -->
+
+<p>Lua has two types of comments - single-line and multi-line.
+To illustrate that, I'll create a new Lua file.
+Here is a regular Lua statement:</p>
+<pre><code>-- In the file comments.lua:
+
+print('string 1')
+</code></pre>
+<p>If at any point, Lua sees two hyphens, then the rest of that line
+is a comment.</p>
+<pre><code>-- Adding to the previous line in comments.lua:
+
+print('string 1') -- print('string 2')
+</code></pre>
+<p>To start a multiline comment, you need to use two hyphens followed by
+two open square brackets.
+To show that this is in fact a multiline comment, I'm going to put
+in multiple lines:</p>
+<pre><code>-- Appending in the file comments.lua:
+
+--[[
+  print('string 3')
+  print('string 4')
+--]]
+</code></pre>
+<p>We'll see that they're not executed.</p>
+<p>To show that this is the end [of the comment block], and that
+they're executed again, I'll create another statement:</p>
+<pre><code>-- Appending in the file comments.lua:
+
+print('string 5')
+</code></pre>
+<p>When I run this, we should only see strings 1 and 5 printed out
+because the rest are commented.</p>
+<pre><code>&gt; dofile('comments.lua')
+string 1
+string 5
+</code></pre>
+<p>There you go!</p>      </section>
+    </div>
+
+    
+  </body>
+</html>

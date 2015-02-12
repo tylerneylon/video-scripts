@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Video Scripts by tylerneylon</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <a href="index.html"><h1>Learn Lua in an Hour</h1></a>
+        <h2>Loops</h2>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+<!-- 8.1 While loops -->
+
+<p>Lua has several loop constructs.
+I'll start by looking at the <code>while</code> loop.
+In a new Lua script, we can create a loop that
+begins with the keyword <code>while</code>,
+followed by a conditional, the keyword <code>do</code>,
+and then an arbitrary block of statements, followed by
+the keyword <code>end</code>:</p>
+<pre><code>-- In the file loops.lua:
+
+i = 1
+while i &lt;= 10 do
+  print(i)
+  i = i + 1
+end
+</code></pre>
+<p>This will count from 1 to 10 and print out the results.
+To verify that, I'll run the script:</p>
+<pre><code>&gt; dofile('loops.lua')
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</code></pre>
+<!-- 8.2 For loops -->
+
+<p>Let's talk about for loops.</p>
+<p>I'll start a new script.</p>
+<p>A simple for loop starts with the keyword <code>for</code>
+and it includes a number range over which we'll iterate
+the loop variable.</p>
+<p>Just like the while loop, you want to include the body of the
+loop between the <code>do</code> and <code>end</code> keywords.</p>
+<pre><code>-- In the file for_loops.lua:
+
+print('simple for')
+for i = 1, 5 do
+  print(i)
+end
+</code></pre>
+<p>We can also use a <em>step parameter</em>.
+In that case, we add a third number to the parameters
+being used for the for loop.</p>
+<pre><code>-- Appending to the file for_loops.lua:
+
+print('for with a step 0.5:')
+for i = 1, 5, 0.5 do
+  print(i)
+end
+</code></pre>
+<p>You can probably guess what these do just by looking at them.
+Maybe the only nontrivial thing is that both the starting and the
+ending numbers are included when I execute the loop.</p>
+<pre><code>&gt; dofile('for_loops.lua')
+simple for
+1
+2
+3
+4
+5
+for with a step 0.5:
+1
+1.5
+2
+2.5
+3
+3.5
+4
+4.5
+5
+</code></pre>
+<p>There we go.</p>
+<p>There's another type of <code>for</code> syntax in Lua using what's called an
+<em>iterator</em>.
+I'm not going to cover them in detail, but I will cover, in a few
+minutes,
+the <code>pairs</code> and <code>ipairs</code> functions,
+which are the most useful iterators that Lua comes with.</p>
+<!-- 8.3 The break statement -->
+
+<p>Lua includes a <code>break</code> statement, but <em>not</em> a <code>continue</code> statement.
+I'll give you an example of <code>break</code>.
+It'll print the first number, and this will stop as soon as the keyword
+<code>break</code> is seen, so it'll only print the first number:</p>
+<pre><code>&gt; for i = 1, 10 do print(i) break end
+1
+</code></pre>
+<!-- 8.4 Repeat-until loops -->
+
+<p>Lua also has a repeat-until loop which is like a do-while loop.
+The syntax is to begin with the keyword <code>repeat</code>, followed by a block
+of statements, the keyword <code>until</code>,
+and then an ending condition.</p>
+<pre><code>-- In the file repeat.lua:
+
+i = 1
+repeat
+  print(i)
+  i = i + 1
+until i == 6
+</code></pre>
+<p>We can confirm that this prints out 1 through 5 by running the script:</p>
+<pre><code>&gt; dofile('repeat.lua')
+1
+2
+3
+4
+5
+</code></pre>
+<p>There you go!</p>
+<!-- 8.5 The goto statement -->
+
+<p>Lua 5.2 added the <code>goto</code> statement.
+I'm not going to cover that in detail in this video.</p>
+<p>In my experience, the vast majority of code works well
+with the loop constructs we've already covered - not using <code>goto</code>;
+although, I also feel that, in rare cases, a <code>goto</code> is
+the best control flow mechanism to use.</p>      </section>
+    </div>
+
+    
+  </body>
+</html>

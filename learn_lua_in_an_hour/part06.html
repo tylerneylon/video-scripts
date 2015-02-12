@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Video Scripts by tylerneylon</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <a href="index.html"><h1>Learn Lua in an Hour</h1></a>
+        <h2>Functions and closures</h2>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+<!-- 6.1 functions: global syntax -->
+
+<p>Let's talk about functions and closures.
+A closure is a function that refers to variables declared outside
+of itself, but which are <em>not</em> globals.</p>
+<p>For this part of the video, I'm going to use a text editor
+to write my Lua because, in practice, you'll be using a text
+editor to write
+your code, and multiline Lua doesn't work as well in the
+interpreter.</p>
+<pre><code>-- In the file fn.lua:
+
+function abc(a, b, c)
+  print(a, b, c)
+  return 3
+end
+</code></pre>
+<p>I've declared a global function here called <code>abc</code>.
+Syntax for functions always starts with the word <code>function</code> and
+ends with the word <code>end</code>.</p>
+<p>Within the interpreter, I can use the built-in <code>dofile</code> function
+to load and execute this script.
+That's what the <code>dofile</code> function does.</p>
+<pre><code>&gt; dofile('fn.lua')
+</code></pre>
+<p>Now I can call <code>abc</code> with any three values that I like, like this:</p>
+<pre><code>&gt; abc(1, 2, 'hi')
+1       2       hi
+</code></pre>
+<!-- 6.2 functions: flexible parameter passing -->
+
+<p>Similar to flexible assignments, Lua function calls accept a flexible
+number of parameters.
+If I call <code>abc</code> with a single parameter, then the extra variables
+inside the function receive the <code>nil</code> value.</p>
+<pre><code>&gt; abc(1)
+1    nil    nil
+</code></pre>
+<p>If I call the function with extra <em>values</em>, the extra values are discarded.</p>
+<pre><code>&gt; abc(1, 2, 3, 4)
+1    2    3
+</code></pre>
+<!-- 6.3 functions: flexible return values -->
+
+<p>Return values work similarly.
+I can accept more or fewer values than are actually returned by the function.</p>
+<pre><code>&gt; a, b = abc()
+nil    nil    nil
+&gt; = a
+3
+&gt; = b
+nil
+</code></pre>
+<p>Now I'm going to define a function that returns 4 values.</p>
+<pre><code>-- In the file fn.lua:
+
+function ret4()
+  return 4, 5, 6, 7
+end
+</code></pre>
+<p>When you chain function calls together, the output of one function goes
+into the input of another,
+similarly to flexible assignment.</p>
+<p>In this example, the extra return value 7 will be discarded.</p>
+<pre><code>&gt; dofile('fn.lua')
+&gt; abc(ret4())
+4    5    6
+</code></pre>
+<!-- 6.4 functions: anonymous and local functions -->
+
+<p>You can also create anonymous functions.
+The syntax is the same, except that you leave out the name of the
+function.
+Here's an example that returns an empty table:</p>
+<pre><code>&gt; g = function () return {} end
+&gt; = g()
+table: 0x7fdfd170a9f0
+</code></pre>
+<p>And you can create <em>local</em> functions.
+That means the function, considered as a variable, only has local scope.</p>
+<pre><code>&gt; local function hi() print('hi') end
+</code></pre>
+<p>This is useful when you're writing a module and you want to call an
+internal function that isn't visible outside the scope of the module.</p>
+<!-- 6.5 functions: closures -->
+
+<p>Let's take a look at an example of a <em>closure</em>.
+I'm going to define a function called <code>adder</code> which takes a number called
+<code>x</code> and returns an anonymous function which adds a new number <code>y</code> and <code>x</code>.</p>
+<pre><code>-- In the file fn.lua:
+
+function adder(x)
+  return function (y)
+    return x + y
+  end
+end
+</code></pre>
+<p>I'll load these into Lua:</p>
+<pre><code>&gt; dofile('fn.lua')
+</code></pre>
+<p>Now I can make a new variable called <code>add1</code> which is the return value of
+<code>adder(1)</code>:</p>
+<pre><code>&gt; add1 = adder(1)
+</code></pre>
+<p>and <code>add30</code> which is the return value of <code>adder(30)</code>:</p>
+<pre><code>&gt; add30 = adder(30)
+</code></pre>
+<p>These are different functions, and when I call them with the same input,
+say 12, I'll get different outputs:</p>
+<pre><code>&gt; = add1(12)
+13
+&gt; = add30(12)
+42
+</code></pre>
+<p>The important thing here is that each of these functions has its own
+private copy of the variable <code>x</code> with a different value.
+If closures are new to you, this is a basic example
+to see the general idea.</p>      </section>
+    </div>
+
+    
+  </body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Video Scripts by tylerneylon</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <a href="index.html"><h1>Learn Lua in an Hour</h1></a>
+        <h2>Types</h2>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+<p>That's three ways to run Lua code.
+Lua also runs from embedded apps.</p>
+<p>Let's talk about types.</p>
+<p>These are all 8 types in Lua.
+I'll mainly talk about these 6 highlighted types in this video.</p>
+<p><code>true</code> and <code>false</code> are the <strong>boolean</strong> values.</p>
+<pre><code>&gt; a = true
+&gt; b = false
+</code></pre>
+<p>The built-in <code>type</code> function returns a string indicating the type of the input.</p>
+<pre><code>&gt; = type(a)
+boolean
+</code></pre>
+<p>There's a single <strong>number</strong> type.
+You can type numbers in standard decimal notation, scientific notation,</p>
+<pre><code>&gt; print(4.22e1)
+42.2
+</code></pre>
+<p>or in hex.</p>
+<pre><code>&gt; print(0x10)
+16
+</code></pre>
+<p>In Lua 5.2 and earlier, numbers are represented internally as 64-bit doubles
+by default. Lua 5.3 still has a single number type, but it can internally use
+either an integer or a double representation.</p>
+<p>The built-in <code>tonumber</code> function converts numbers and strings to numbers.</p>
+<pre><code>&gt; = tonumber('2.7')
+2.7
+</code></pre>
+<p>Lua <strong>strings</strong> are immutable. You can use single- or double-quotes to specify
+them. It doesn't make any semantic difference which type of quotes you use.</p>
+<pre><code>&gt; s1 = 'hi'
+&gt; s2 = "hi"
+&gt; = (s1 == s2)
+true
+</code></pre>
+<p>These literals can have the usual escaped characters like newlines and tabs.</p>
+<pre><code>&gt; print('hi \n there \t \\')
+hi
+ there   \
+</code></pre>
+<p>Lua strings internally are arbitrary-length byte sequences; zero bytes are allowed.
+Type a backslash followed by up to three decimal digits to specify arbitrary bytes.</p>
+<pre><code>&gt; = '\65\66\67\0'
+ABC
+</code></pre>
+<p>Multiline strings can start with two open square brackets. They don't allow
+escaped characters within this type of string.</p>
+<pre><code>&gt; print([[
+one
+two
+three]])
+one
+two
+three
+</code></pre>
+<p>The built-in <code>tostring</code> function returns a reasonable
+string representation of any value.</p>
+<pre><code>&gt; = tostring(true)
+true
+</code></pre>
+<p><strong>Tables</strong> are key-value maps, and Lua's only container type.
+I'll cover tables later in the video.</p>
+<p>The <strong>nil</strong> value conceptually means no value.
+Undefined variables evaluate to <code>nil</code>; it's <em>not</em> an error.</p>
+<pre><code>&gt; = abc
+nil
+</code></pre>
+<p>Setting values to <code>nil</code>
+undefines them and allows them to be
+garbage collected.</p>
+<pre><code>&gt; s1 = nil
+</code></pre>
+<p>You can also explicitly call <code>collectgarbage()</code>, but usually you
+don't have to because the garbage collector is running automatically.</p>
+<pre><code>&gt; collectgarbage()
+</code></pre>
+<p><strong>Functions</strong> can be assigned to variables and passed into and out of
+other functions. I'll talk more about functions later in the video.</p>
+<pre><code>&gt; fn = function (x) return x*x end
+&gt; = fn(3)
+9
+</code></pre>
+<p><strong>Userdata</strong> and <strong>threads</strong> are slightly advanced types that
+I won't cover in detail now.
+A userdata object is basically a black-box type used by libraries
+to wrap C-level structs like a <code>FILE *</code> from C's <code>stdio</code> library.</p>
+<pre><code>&gt; f = io.open('file', 'w')
+&gt; = type(f)
+userdata
+</code></pre>
+<p>A thread is a coroutine instance.</p>
+<p>Assignments are global by default.
+Use <code>local</code> to make them local.</p>
+<pre><code>&gt; local a = 7
+</code></pre>      </section>
+    </div>
+
+    
+  </body>
+</html>

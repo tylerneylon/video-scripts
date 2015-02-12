@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Video Scripts by tylerneylon</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <a href="index.html"><h1>Learn Lua in an Hour</h1></a>
+        <h2>Docs, Installation, and the Interpreter</h2>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+<p>Let's get started with the docs and how to install Lua.
+The official site is <a href="http://www.lua.org/">lua.org</a>.
+If I click on documentation, I can see the official book,
+called <em>Programming in Lua</em>.</p>
+<p>The third edition is the latest right now.
+The first edition is available online.
+You can read the entire thing for free.
+It's useful, but it covers an older version of the language.</p>
+<p>Another great resource is the reference manual. This is
+basically a set of man pages for Lua. It covers
+the C API, the standard library, and all of the core language itself.
+It's not a great way to learn,
+but once you know the language, it is a great way to look up things
+you may have forgotten, or technical details you <em>almost</em> know, but that
+you need to double-check.</p>
+<p>If I click on
+<a href="http://www.lua.org/download.html">the download link</a>,
+I can download a gzipped file [of Lua's source].
+These instructions include downloading and unzipping.
+The highlighted instructions here will
+work you through downloading and building on linux.
+To build on mac os x, you have to replace the word <code>linux</code>
+with <code>macosx</code>.
+Or you could use <a href="http://brew.sh/">homebrew</a>.
+Just type in <code>brew install lua</code>.</p>
+<p>On windows, you can use the
+<a href="https://code.google.com/p/luaforwindows/"><code>luaforwindows</code></a>
+project on Google code.
+I haven't used this myself, but it looks good, so I think
+it will probably work well.</p>
+<p>As far as the interpreter goes, once you've installed Lua,
+you can type in <code>lua</code> in the shell, and now you can type
+in statements directly.</p>
+<p>If you want to see the value of an expression,
+you can't just type the expression - at least not with Lua 5.2 or earlier.
+You have to type an equal sign as the first character of a line
+and then it will evaluate the expression after the equal sign.</p>
+<p>Control-D escapes from the interpreter.</p>
+<p>You can use your favorite text editor to
+type in a Lua script. Then you can type at the shell
+<code>lua</code> 
+and then the name of your script file, and it will execute it.</p>
+<p>If you know the absolute path of your Lua interpreter, then
+you can insert a first line of the form <code>#!</code> followed by the
+absolute path of your interpreter.
+Make sure that your file has execute permissions. Then you
+can execute that file directly.</p>      </section>
+    </div>
+
+    
+  </body>
+</html>

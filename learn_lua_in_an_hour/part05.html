@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Video Scripts by tylerneylon</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <a href="index.html"><h1>Learn Lua in an Hour</h1></a>
+        <h2>Tables and Print</h2>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+<!-- 5.1 tables: intro -->
+
+<p>Tables are Lua's only container type. They're associative arrays,
+which are key-value dictionaries built using hash tables.</p>
+<!-- 5.2 tables: getting and setting identifier keys -->
+
+<p>I can set up an empty table by using open-and-close curly brackets
+like this:</p>
+<pre><code>&gt; t = {}
+</code></pre>
+<p>From there I can set values using this dot syntax:</p>
+<pre><code>&gt; t.abc = 12
+</code></pre>
+<p>I can also perform lookups.
+This dot syntax treats the keys as strings, and it only works for
+identifiers, which means the strings can only contain
+alphanumeric or underscores characters.</p>
+<pre><code>&gt; = t.abc
+12
+</code></pre>
+<p>I can also perform lookups on undefined keys, which return <code>nil</code>
+without an error.</p>
+<pre><code>&gt; = t.def
+nil
+</code></pre>
+<p>However, if I try to perform a lookup on a <code>nil</code> as if it were a
+table, that will be an error:</p>
+<pre><code>&gt; = t.def.hij
+stdin:1: attempt to index field 'def' (a nil value)
+stack traceback:
+        stdin:1: in main chunk
+        [C]: ?
+</code></pre>
+<!-- 5.3 tables: getting and setting general keys -->
+
+<p>Lua also has a square-bracket notation which allows me to use
+arbitrary Lua expressions as keys.</p>
+<pre><code>&gt; = t['abc']
+12
+</code></pre>
+<p>Here's an example of a number as a key via the variable <code>a</code>:</p>
+<pre><code>&gt; a = 12
+t[a] = 34
+</code></pre>
+<p>Here's an example of a table as a key:</p>
+<pre><code>&gt; t[t] = 56
+</code></pre>
+<p>Here's an example of a function as a value:</p>
+<pre><code>&gt; t[1] = print
+</code></pre>
+<p>I can call the function like this:</p>
+<pre><code>&gt; t[1]('hi')
+hi
+</code></pre>
+<!-- 5.4 tables: literals -->
+
+<p>Lua also has a syntax to specify non-empty tables.
+In this case, I'm creating a table with the keys <code>abc</code> and <code>def</code>:</p>
+<pre><code>&gt; u = {abc = 12, def = 34}
+&gt; = u.abc
+12
+</code></pre>
+<p>This syntax works by treating the left-hand side as a string key;
+it has to be an identifier.
+The right-hand side is an arbitrary Lua expression.
+Here's an example with a function on the right-hand side:</p>
+<pre><code>&gt; u = {pr = print}
+&gt; u.pr('yo')
+yo
+</code></pre>
+<p>If you want to specify non-identifiers as keys, you can use
+a square-bracket notation like this:</p>
+<pre><code>&gt; v = {[34] = 1, [true] = 2}
+&gt; = v[true]
+2
+</code></pre>
+<!-- 5.5 tables: arrays -->
+
+<p>If a table has consecutive number keys starting at 1, then
+it's called an <em>array</em>. Arrays aren't a new type - they're
+just tables with a specific key structure.
+In Lua syntax, I can specify an array by omitting the <code>=</code>'s
+in the table literal:</p>
+<pre><code>&gt; arr = {2, 3, 5, 7}
+</code></pre>
+<p>This is the first 4 prime numbers.
+When I use this syntax, Lua assigns keys as numbers starting
+at 1 and increasing from there.</p>
+<pre><code>&gt; = arr[1]
+2
+&gt; = arr[2]
+3
+</code></pre>
+<p>I can use the hash operator to see the size of an array:</p>
+<pre><code>&gt; = #arr
+4
+</code></pre>
+<!-- 5.6 tables: equality -->
+
+<p>Tables in Lua are considered equal only if they're identical.</p>
+<pre><code>&gt; = t == t
+true
+</code></pre>
+<p>It is <em>not</em> enough for their contents to be the same, like this:</p>
+<pre><code>&gt; a = {}
+&gt; b = {}
+&gt; = a == b
+false
+</code></pre>
+<p>In other words, the expressions being compared have to evaluate to
+literally the same table.</p>
+<pre><code>&gt; a = b
+&gt; = a == b
+true
+</code></pre>
+<!-- 5.7 print -->
+
+<p>We've already been using the built-in <code>print</code> function.</p>
+<pre><code>&gt; print('hi')
+hi
+</code></pre>
+<p>This function takes a variable number of parameters, it calls <code>tostring</code>
+on each of those parameters, joins them with tab characters,
+adds a newline to the end, and sends that all to standard out.</p>
+<pre><code>&gt; print(1, 2, false, nil, {})
+1       2       false   nil      table: 0x7fc448f038e0
+</code></pre>      </section>
+    </div>
+
+    
+  </body>
+</html>

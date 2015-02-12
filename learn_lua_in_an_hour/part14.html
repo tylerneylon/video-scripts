@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Video Scripts by tylerneylon</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <a href="index.html"><h1>Learn Lua in an Hour</h1></a>
+        <h2>Useful standard library functions</h2>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+<!-- 14.1 file operations -->
+
+<p>Now we're going to talk about what I think are the
+most useful functions in Lua's standard library.
+We'll start with file operations.</p>
+<p>You can open files in Lua with the <code>io.open</code> function like this:</p>
+<pre><code>&gt; f = io.open('file.txt', 'w')
+</code></pre>
+<p>The first argument is the filename, and then the mode - 
+just like <code>fopen</code> in C.
+<code>w</code> means write mode, and you can use <code>r</code> for read mode.</p>
+<p>You can write to a file by using the <code>write</code> method,
+giving it the string that you want to write.</p>
+<pre><code>&gt; f:write('pizza\n')
+</code></pre>
+<p>I used a colon instead of a period because the <code>write</code> method
+treats <code>f</code> as an object being acted upon.
+I'll talk more about the colon syntax later.</p>
+<p>You can close the file by using the <code>close</code> method.</p>
+<pre><code>&gt; f:close()
+</code></pre>
+<p>Reading a file is the same, except that we use the <code>read</code>
+method. This method has the same input structure as
+<code>io.read</code>. Here's an example:</p>
+<pre><code>&gt; f = io.open('file.txt')
+&gt; = f:read()
+pizza
+&gt; f:close()
+</code></pre>
+<!-- 14.2 the math module -->
+
+<p>Next I'll talk about the pieces of the math module
+that I find most useful.</p>
+<p>You can find the square root of a number using the
+<code>math.sqrt</code> function.</p>
+<pre><code>&gt; = math.sqrt(64)
+8
+&gt; = math.sqrt(2)
+1.4142135623731
+</code></pre>
+<p>The <code>math.random</code> function behaves differently
+depending on the number of inputs it receives.
+With no inputs, it returns a pseudorandom float
+between 0 and 1. It can equal 0, but is always
+less than 1.</p>
+<pre><code>&gt; = math.random()
+0.45865013192345
+</code></pre>
+<p>With one input, it returns a pseudorandom integer
+between 1 and the input, including both endpoints
+as possible outputs.</p>
+<pre><code>&gt; = math.random(10)
+6
+</code></pre>
+<p>With two inputs, it returns a pseudorandom integer
+between the two inputs; again the endpoints are
+possible outputs.</p>
+<pre><code>&gt; = math.random(5, 8)
+5
+</code></pre>
+<p>The math module has common trig functions, which
+work in radians. Pi is available as <code>math.pi</code>.</p>
+<pre><code>&gt; = math.pi
+3.1415926535898
+</code></pre>
+<!-- 14.3 the string module -->
+
+<p>Now for some functions in the <code>string</code> module.</p>
+<p>The <code>string.sub</code> function returns the substring of its
+first input between two indices given as parameters.
+Here's an example:</p>
+<pre><code>&gt; str = "pancakes"
+&gt; = string.sub(str, 4, 7)
+cake
+</code></pre>
+<p>Both endpoints are included. In this example, "c"
+is the 4th letter and "e" is the 7th.</p>
+<p>You can also use <code>string.sub</code> as a method call with
+the colon syntax, like this:</p>
+<pre><code>&gt; = str:sub(1, 3)
+pan
+</code></pre>
+<p>Remember that Lua strings are arbitrary byte sequences.
+The <code>string.byte</code> function returns the numeric
+value of a byte within a string like this:</p>
+<pre><code>&gt; = string.byte(str, 2)
+97  -- Editor's note: 97 is the decimal ascii value of 'a'.
+</code></pre>
+<p>Again, you call it as a method call using colon syntax
+like this:</p>
+<pre><code>&gt; = str:byte(2)
+97
+</code></pre>
+<p>The <code>string.format</code> function works like the <code>printf</code> function
+found in many other languages. Here's an example:</p>
+<pre><code>&gt; = string.format("I eat %s %d times a day", str, 3)
+I eat pancakes 3 times a day
+</code></pre>
+<p>I won't cover Lua's format specifiers in detail, but they
+are mostly the same as those in C.</p>      </section>
+    </div>
+
+    
+  </body>
+</html>

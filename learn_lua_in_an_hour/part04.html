@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Video Scripts by tylerneylon</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <a href="index.html"><h1>Learn Lua in an Hour</h1></a>
+        <h2>Operators %title Flexible Assignment</h2>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+<p>Let's talk about operators.</p>
+<p>Lua has the usual arithmetic operators.</p>
+<pre><code>&gt; = 1 + 2 * 3 ^ 2
+19
+</code></pre>
+<p>It also adds an exponentiation operator,
+so this is 3 squared times 2 plus 1.</p>
+<p>Division is always a floating-point operation, even if the
+inputs are integer values.</p>
+<pre><code>&gt; = 2 / 3
+0.66666666666667
+</code></pre>
+<p>Lua has a clean modulo operator.
+It's capable of handling non-integer or negative inputs.</p>
+<pre><code>&gt; = 10 % 3
+1
+&gt; = 1.1 % 0.4
+0.3
+</code></pre>
+<p>There's also a hash operator which gives us the length
+of a string and can work on tables, as we'll see later in
+the video.</p>
+<pre><code>&gt; = s2
+hi
+&gt; = #s2
+2
+</code></pre>
+<p>Lua has the usual conditional or comparison operators.</p>
+<pre><code>&gt; = 2 == 2
+true
+</code></pre>
+<p>In the case of the not-equal operator, it's spelled with
+a tilde as the first character (<code>~=</code>).</p>
+<pre><code>&gt; = 2 ~= 3
+true
+</code></pre>
+<p>When you compare two values that have different types, Lua
+always considers them not equal to each other.</p>
+<pre><code>&gt; = 2 == '2'
+false
+</code></pre>
+<p>Lua also has the standard less-than / greater-than operators.</p>
+<pre><code>&gt; = 'abc' &lt; 'def'
+true
+</code></pre>
+<p>In the case of strings, Lua puts them in alphabetical
+order using the current locale.</p>
+<p>The string concatenation operator in Lua is the double-dot.</p>
+<pre><code>&gt; = 'abc' .. 'def'
+abcdef
+</code></pre>
+<p>Nil and false are the only falsy values in Lua.</p>
+<pre><code>&gt; = not not nil
+false
+</code></pre>
+<p>This is interesting because that means 0 is considered truthy.</p>
+<pre><code>&gt; = not not 0
+true
+</code></pre>
+<p>The boolean operators are short-circuited, which means that as
+soon as Lua can determine the total value of the <code>or</code> or <code>and</code> clause,
+it doesn't even bother to evaluate the rest of the expressions, like that:</p>
+<pre><code>&gt; = true and print('hi')
+hi
+nil
+&gt; = false and print('hi')
+false
+</code></pre>
+<p>I'll quickly mention how you can work with binary operators.
+Lua 5.2 has a module called <code>bit32</code> module which offers them as functions.
+Lua 5.3 actually adds these operators to the language itself.</p>
+<p>Lua supports assignments with multiple variables on the left and
+multiple expressions on the right.</p>
+<pre><code>&gt; a, b = 1, 2
+&gt; = a
+1
+&gt; = b
+2
+</code></pre>
+<p>Lua performs this operation by first
+evaluating everything on the right, putting it on a stack, and <em>then</em>
+making the assignments to the left-hand side.</p>
+<pre><code>&gt; a, b = b, a
+&gt; = a
+2
+&gt; = b
+1
+</code></pre>
+<p>This is important because it enables things like the swap operation
+I just performed.</p>
+<p>If there are more variables on the left than on the right,
+the extra variables become <code>nil</code>.</p>
+<pre><code>&gt; a, b, c = 1, 2
+&gt; = c
+nil
+</code></pre>
+<p>If there are more expressions on the right-hand side, then everything
+is evaluated, but the extra expressions are thrown away.</p>
+<pre><code>&gt; a = 1, 2
+</code></pre>      </section>
+    </div>
+
+    
+  </body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Video Scripts by tylerneylon</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <a href="index.html"><h1>Learn Lua in an Hour</h1></a>
+        <h2>Error handling</h2>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+<!-- 13.1 error categories and the error function -->
+
+<p>Lua has two categories of errors that can be communicated
+across function calls.</p>
+<p>The first category includes exception-like errors.
+The second includes errors given by return values.</p>
+<p>Now, the documentation avoids words like "exception," "throw,"
+and "catch." But I'm going to use the exception language because
+I think it clearly communicates the behavior that's going on here.</p>
+<p>First I'll show you an example of an error thrown by the
+standard library
+which is then caught by the interpreter and printed.</p>
+<pre><code>&gt; io.write(false)
+stdin:1: bad argument #1 to 'write' (string expected, got boolean)
+stack traceback:
+    &lt;other stuff here&gt;
+</code></pre>
+<p>In this case, there's a bad argument to the <code>io.write</code> function.</p>
+<p>If you want to throw a custom exception error, then you
+can call the built-in <code>error</code> function with a string
+describing the error.</p>
+<pre><code>&gt; function f() error('my error msg') end
+</code></pre>
+<p>In this case, my function <code>f</code> will throw that error;
+the interpreter will catch it and print <code>my error msg</code>.</p>
+<pre><code>&gt; f()
+stdin:1: my error msg
+stack traceback:
+    &lt;other stuff here&gt;
+</code></pre>
+<!-- 13.2 the assert function -->
+
+<p>The built-in <code>assert</code> function accepts as input a boolean
+and an error message.
+It throws the error message if the boolean is false, like this:</p>
+<pre><code>&gt; cond = false
+&gt; = assert(cond, 'ruh-roh')
+stdin:1: ruh-roh
+stack traceback:
+    &lt;other stuff here&gt;
+</code></pre>
+<p>However, if the condition is true, then it simply returns
+the inputs it receives.</p>
+<pre><code>&gt; cond = true
+&gt; return assert(cond, 'ruh-roh')
+true    ruh-roh
+-- Editor's note: the "return" acts the same as an =.
+</code></pre>
+<p>A common pattern in Lua, for functions that return error
+messages, is to first return a boolean indicating success or
+failure, followed by, in the success case, the useful return
+values; or in the failure case, an error message.</p>
+<p><code>assert</code> works well with this pattern.
+I'll demonstrate by creating two functions that return
+success or failure depending on which one I call.</p>
+<pre><code>&gt; funciton bad() return false, 'was bad' end
+&gt; function good() return true, 42 end
+</code></pre>
+<p>And we'll see that
+<code>assert</code> easily wraps these function calls.
+In this case it'll throw the error message:</p>
+<pre><code>&gt; = assert(bad())
+stdin:1: was bad
+stack traceback:
+    &lt;other stuff here&gt;
+</code></pre>
+<p>And in this case - the good case - it will simply
+return the useful return values:</p>
+<pre><code>&gt; = assert(good())
+true    42
+</code></pre>
+<!-- 13.3 the pcall function -->
+
+<p>The built-in <code>pcall</code> function makes <em>protected</em> function
+calls.
+It basically wraps a call to catch exceptions.</p>
+<p>You use it by first sending in the function that you want to call
+followed by parameters that you want to give to it.</p>
+<pre><code>&gt; =pcall(print, 'a good call')
+a good call
+true
+</code></pre>
+<p>It calls the function with the given parameters.
+The first return value is going to be a boolean indicating
+success or failure. The others
+are either going to be the called function's return values,
+or an error message if an exception was thrown.</p>
+<p>I'll give an example of a case where an exception is thrown.</p>
+<pre><code>&gt; = pcall(io.write, false)
+false    bad argument #1 to '?' (string expected, got boolean)
+</code></pre>
+<p>In summary, <code>pcall</code> converts exception-like errors
+into return-value errors.
+I like to think of it as a sort of inverse of the
+<code>assert</code> function.</p>
+<!-- 13.4 the xpcall function -->
+
+<p>There's another built-in function called <code>xpcall</code> which
+offers basically the same functionality as <code>pcall</code>, except
+that one of its input parameters is a callback function
+to handle exception-like errors.</p>      </section>
+    </div>
+
+    
+  </body>
+</html>

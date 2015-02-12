@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Video Scripts by tylerneylon</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <a href="index.html"><h1>Learn Lua in an Hour</h1></a>
+        <h2>The lgraph example</h2>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+<p>At this point, I've actually covered all of the Lua material
+that I wanted to cover in this video. But I'd like to end
+with something fun which is a concrete example using a lot
+of the things we've just gone over in an app that will act
+like a graphing calculator based in the terminal.
+It will receive a mathematical function as an input string,
+and it will use ascii characters to draw the graph of
+that function.</p>
+<p>So, let's make this script.</p>
+<p>I'll call it <code>lgraph</code> for Lua grapher.</p>
+<p>I'll begin with a hash-bang (<code>#!</code>) string so that I
+can call it directly from the shell without having to
+consciously use the Lua interpreter.</p>
+<!-- 0:44 -->
+
+<p>I'm going to start with a multiline string here, which
+is a usage string.
+I like to do this because programmers looking at the script
+can see the usage right away at the top of the file.</p>
+<p>It's assigned also to a global variable which I can later use
+to print out to the user what's going on.</p>
+<p>Right now I'm just setting up the structure.
+I plan to explain and program in a top-down manner, meaning
+that I'm going to start with the highest conceptual-level
+thing happening and define more-and-more detailed pieces as
+I need them.</p>
+<!-- 1:27 -->
+
+<p>I'm going to define a class called <code>Grapher</code>.
+At the very end here I'm going to declare an instance of that
+class, and I will call this <code>graph</code> method on it with <code>arg[1]</code>.
+<code>arg</code> is a special built-in variable name that the interpreter
+populates with the strings we get from the command line.</p>
+<p>To be nice to the user, if they have not given us an equation
+to graph, instead of just having a horrible failure, we'll
+print out the usage string. And we'll exit politely.</p>
+<p>Now we're ready to define the <code>Grapher</code> class itself.</p>
+<p>I'm going to start off with a table of regular values - no
+functions yet.
+I'll define my <code>x</code> window, my <code>y</code> window, number of columns
+in ascii to print out, number of rows as well.
+I'll just hard code them for now because it's simple to do.</p>
+<p>Here is a constructor.
+We'll make a local table.
+I have to make sure the <code>__index</code> key is set to <code>self</code>.
+And I'm going to return the new instance with <code>self</code> set
+as the metatable.</p>
+<!-- 2:50 -->
+
+<p>Now we're ready to define this key function - the <code>graph</code>
+function, which receives an equation (<code>eqn</code>) string as input.
+I'm going delegate a lot of my work to this <code>setup_char_table</code>
+method that I have <em>not</em> written yet. I will write it.</p>
+<p>The idea there is that I have this <code>self.char</code> table, which is
+sort of like a two-dimensional array, conceptually.
+That will give me a way to easily iterate over all the rows 
+and columns, as I'm doing here right now.
+If there is no value there - if it's <code>nil</code> - I'll just write
+a space character out. If it's not <code>nil</code>, then I'll write
+whatever character <em>is</em> there out.
+That's what that current code will do.</p>
+<p>That's the complete <code>graph</code> function.</p>
+<!-- 3:43 -->
+
+<p>Really, it's not doing any intelligent work, because I've
+delegated it all to this <code>setup_char_table</code> function, which
+is going to do the real work here.</p>
+<p>This line is probably going to be the most single integesting
+line because it's going to do the most nontrivial work in the
+program.
+What I'm going to do is parse and compile <code>eqn</code> as, basically,
+Lua code.</p>
+<!-- 4:10 -->
+
+<p>Completely insecure code.
+Security vulnerabilities there.
+Let's pretend the user is a very friendly, nice person.</p>
+<p>Let me explain this <code>...</code> notation, because this might be
+confusing.
+When Lua compiles something using <code>load</code> or <code>loadstring</code>,
+<code>...</code> is sort of like a macro that expands to be all the
+parameters that are given to the function <code>f</code>.
+Remember that <code>loadstring</code> returns a function. So if I were
+to execute this <code>y = f(3)</code> line, then this code would be
+executed with <code>x</code> set to the value 3.
+Let's say <code>eqn</code> was set to the string <code>x^2</code>.
+Effectively, the function <code>f</code> would be <code>x^2</code>, so the value
+of <code>y</code> would be 9.</p>
+<p>Really, <code>eqn</code> could be any valid Lua expression, as long as
+it depends on <code>x</code> and no other variables, then we have
+whatever function the user wanted to define.</p>
+<p>That makes it easier to write a graphing calculator.</p>
+<p>A very insecure graphing calculator.</p>
+<p>But, a graphing calculator nonetheless.</p>
+<p>I have not yet written the function <code>range_mapper</code>.
+But I will.</p>
+<p>That function gives us exactly a linear mapping between
+two ranges -- between a beginning range -- in this case I'm
+mapping ascii column space into the <code>x</code> space, mathematically.
+Based on those two things, what I can do is go through all the
+columns that I care about. For each column, figure out what the
+mathematical <code>y</code> value is based on <code>col</code>.
+Then I can use that mathematical <code>y</code> value to convert back
+into ascii space like that.</p>
+<p>Essentially, what I want to do here, is I want to set
+<code>self.char[col][row]</code> to be equal to <code>'o'</code>. It may be the case that
+<code>self.char[col][row]</code> can't be set yet because this value
+(<code>self.char[col]</code>) could be <code>nil</code>.</p>
+<!-- 6:32 -->
+
+<p>This could be the first thing I'm putting in that particular column.
+In fact, most of the time we would expect that to be true.</p>
+<p>I wonder if I could just use this shortcut?
+Probably, I can just do that - let's try that out.
+Ok, great.</p>
+<p>I've done everything except for these two supporting functions
+that I haven't defined yet, but that I've used.
+I've actually used two functions that I haven't defined yet.</p>
+<p>One is called <code>round</code>, which is easy.
+This is just going to round to the nearest integer, which is
+the same as taking the floor of <code>x + 0.5</code>.</p>
+<p>Now this function, <code>range_mapper</code>, because it's going to
+<em>return</em> a function that I have to make on the fly.
+Conceptually, what I'm going to do is calculate this percentage
+that the input is from <code>a1</code>. The input is a number in the range
+<code>a1</code> to <code>b1</code>. I'm going to turn that into a percentage. Then
+I'm going to return that percentage converted into the
+<code>a2</code> to <code>b2</code> range.</p>
+<p>Ok.</p>
+<p>There's a very good chance that I've made some typos along the
+way, so let's take a look at those typos.</p>
+<p>I forgot to write the word <code>set</code> there.</p>
+<p>Let's try this again.</p>
+<p>Let's see ... <code>perc_from_a1</code>.</p>
+<p>There we go! Great! Only two typos... so far.</p>
+<p>Let's make a more interesting graph here.</p>
+<p>Sweet, there's a parabola.</p>
+<p>Let's do one of my favorites - let's do a little trig.</p>
+<p>Aw, yea, that's looking good.</p>
+<p>Something even more interesting.
+Here's a nice trig function.
+I like that.</p>      </section>
+    </div>
+
+    
+  </body>
+</html>

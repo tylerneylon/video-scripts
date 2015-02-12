@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Video Scripts by tylerneylon</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <a href="index.html"><h1>Learn Lua in an Hour</h1></a>
+        <h2>Adding a subclass</h2>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+<p>Now I'd like to extend the functionality of this script
+by being able to optionally draw the x-axis and the y-axis.</p>
+<p>I'm going to do this by subclassing the <code>Grapher</code> class.
+I'll make a subclass called <code>AxisGrapher</code>.
+To be honest, the point of making a subclass here instead of just
+adding functionality to the existing class is to illustrate what it's
+like to make a subclass.</p>
+<p>If I were not using this in a tutorial video, I might not implement it
+exactly this way.
+I've set up the base class so that I really just need to override this
+one function - <code>setup_char_table</code> - in order to slightly modify the
+behavior of the base class.</p>
+<p>What I'm doing here is making the call to the super class's version of
+this method. I have <em>not</em> used colon syntax in that line because I
+want <code>self</code> to be the value of <code>self</code> that I receive in this method
+call, but if I used a colon here, then <code>Grapher</code> would be set as
+<code>self</code> inside the call. In this special case, this is a case where I
+cannot use colon syntax. I have to be conscious of what object owns
+the method, and what <code>self</code> is. <code>self</code> might not be the same as
+where the method is.</p>
+<p>That's a special case when you call super.</p>
+<p>What I've just done is set <code>c</code> to the column that represents the
+<code>y=0</code> column - I mean <code>x=0</code> column, sorry.</p>
+<p>Now I'm going to iterate <code>r</code> over all possible rows. I'll set that
+character to be a vertical bar (<code>|</code>). We can make that a one-liner.</p>
+<p>Let's draw the x-axis. Again, I'm going to use <code>range_mapper</code> to
+map my <code>y=0</code> value into the row value, like that.
+I can iterate over all columns and this time I'll use a hyphen
+(<code>-</code>) as the character.</p>
+<p>That's everything I need to do there.</p>
+<p>If I'm being careful about parsing the command-line arguments, then
+basically the way I'm going to check if they want to use axes is to
+look for <code>-a</code> as a flag. If they have that flag, then I expect there
+to be another argument, <code>arg[2]</code>.
+I'm going to act differently depending on whether or not the first
+argument is a <code>-a</code>.
+If it is a <code>-a</code>, then my global variable <code>g</code> will be an <code>AxisGrapher</code>
+instance. For convenience here, I'll copy over the math equation to
+graph into <code>arg[1]</code>. From this point on, <code>arg[1]</code> is always the
+equation to graph.</p>
+<p>If there was no <code>-a</code>, we'll continue to use the original <code>Grapher</code>
+class for the instance.</p>
+<p>If I've done everything correctly - great!</p>
+<p>I can even edit this instance here (the bash line) - there we go!
+There's our axes.</p>      </section>
+    </div>
+
+    
+  </body>
+</html>

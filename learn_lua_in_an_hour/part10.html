@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Video Scripts by tylerneylon</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <a href="index.html"><h1>Learn Lua in an Hour</h1></a>
+        <h2>if, else, elseif</h2>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+<!-- 10.1 if, else, elseif -->
+
+<p>The <code>if</code> statement in Lua is straightforward.</p>
+<p>I'll start by giving a very simple example.
+You start with the keyword <code>if</code>, a condition,
+the keyword <code>then</code>, followed by any block of statements, and
+the keyword <code>end</code>.</p>
+<pre><code>&gt; i = 0
+&gt; if i == 0 then
+&gt;&gt;  print(1)
+&gt;&gt; end
+1
+</code></pre>
+<p>It does what you'd expect it to do.
+I'll show you a more complicated example now.</p>
+<pre><code>&gt; if i == 0 then
+&gt;&gt;  print(1)
+&gt;&gt; elseif i &gt; 0 then
+&gt;&gt;  print(2)
+&gt;&gt; else
+&gt;&gt;  print(3)
+&gt;&gt; end
+1
+</code></pre>
+<p>You can have an <code>elseif</code> clause, and you can have an <code>else</code> clause.
+Both of those are optional.
+You could have one without the other, or just have the <code>if</code> clause
+by itself.</p>      </section>
+    </div>
+
+    
+  </body>
+</html>

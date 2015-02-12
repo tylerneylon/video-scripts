@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Video Scripts by tylerneylon</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <a href="index.html"><h1>Learn Lua in an Hour</h1></a>
+        <h2>Pairs and ipairs</h2>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+<!-- 9.1 pairs -->
+
+<p>The <code>pairs</code> and <code>ipairs</code> functions allow us to iterate over
+tables.
+I'll demonstrate by defining a table with three key-value pairs:</p>
+<pre><code>&gt; t = {key1 = true, key2 = false, key3 = true}
+</code></pre>
+<p>We can use an iterator with a special form of a for loop using
+the <code>in</code> keyword, like this. I'll print out all the key-value
+pairs in the table.</p>
+<pre><code>&gt; for k, v in pairs(t) do print(k, v) end
+key1  true
+key3  true
+key2  false
+</code></pre>
+<p>The first loop variable - which is <code>k</code> here - gets the keys
+from the table.
+The second - which is <code>v</code> here - gets the values.</p>
+<p>Tables don't store any order information about keys, and
+we don't get any guarantees about the order of iteration.</p>
+<p>I can also use a single loop variable if I only care about
+the keys:</p>
+<pre><code>&gt; for k in pairs(t) do print(k) end
+key1
+key3
+key2
+</code></pre>
+<p>If I only care about the values, then I do need to use two
+loop variables, but, as a convention to other programmers,
+I can set an underscore <code>_</code> as the first loop variable.
+This indicates that I don't really care about the value stored
+in the underscore variable.</p>
+<pre><code>&gt; for _, v in pairs(t) do print(v) end
+true
+true
+false
+</code></pre>
+<!-- 9.2 ipairs -->
+
+<p>The <code>ipairs</code> function works with arrays, so I'll define an
+array with some Fibonacci numbers in it.</p>
+<pre><code>&gt; arr = {1, 1, 2, 3, 5, 8}
+</code></pre>
+<p>The syntax to use <code>ipairs</code> is the same as <code>pairs</code>, like this:</p>
+<pre><code>&gt; for k, v in ipairs(arr) do print(k, v) end
+1       1
+2       1
+3       2
+4       3
+5       5
+6       8
+</code></pre>
+<p>The difference is that <code>ipairs</code> expects its input table to
+be an array, and that it iterates over keys in order starting
+from 1.</p>
+<p>To summarize, use <code>ipairs</code> to iterate over an array that needs
+to be processed in order; otherwise use <code>pairs</code>.</p>      </section>
+    </div>
+
+    
+  </body>
+</html>

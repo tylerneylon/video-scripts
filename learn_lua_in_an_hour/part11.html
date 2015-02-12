@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Video Scripts by tylerneylon</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <a href="index.html"><h1>Learn Lua in an Hour</h1></a>
+        <h2>io.read, io.write</h2>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+<!-- 11.1 io intro -->
+
+<p>So far we know how to print to standard out using the <code>print</code> function.</p>
+<p>Now I'm going to talk about two functions in the standard library called
+<code>io.read</code> and <code>io.write</code>.
+<code>io</code> is a table.
+It's a table that has some functions as some of its values.</p>
+<p>It's part of the standard library, and
+if you're using Lua from an embedded app, such as a game, the
+developers may have chosen to exclude some of the modules of the
+modules of the standard library - or all of them -
+for security reasons, probably.
+So it's not guaranteed that you have access to these functions.
+By default, such as in the interpreter, you <em>do</em> have access to these functions.</p>
+<p>I'm going to tell you about them since they're very useful.</p>
+<!-- 11.2 io.read -->
+
+<p>The default action of <code>io.read</code> is to read a line from standard in.</p>
+<p>The return value is the string with the line.
+However, it excludes the newline character at the end of the line.</p>
+<pre><code>&gt; line = io.read()
+hi  -- Editor's note: the string "hi&lt;enter&gt;" is user-typed.
+&gt; = line
+hi
+&gt; = #line
+2
+</code></pre>
+<p>You can also use <code>io.read</code> by giving it a number parameter.
+This asks <code>io.read</code> to read up to that many characters from standard in.</p>
+<pre><code>&gt; s = io.read(4)
+abcdefghi  -- User-typed.
+</code></pre>
+<p>As you can see in this example,
+the variable <code>s</code> will have 4 characters.</p>
+<pre><code>&gt; = s
+abcd
+</code></pre>
+<!-- 11.3 io.write -->
+
+<p><code>io.write</code> acts similarly to <code>print</code>.
+I'll give it a string as input here:</p>
+<pre><code>&gt; s = 'hallo\n'
+&gt; io.write(s)
+hallo
+</code></pre>
+<p>One thing that's interesting is that the string contained a
+newline. <code>io.write</code> did <em>not</em> add a newline - that's the way
+<code>io.write</code> behaves.
+<code>print</code>, on the other hand, if I give it the same string, <em>will</em>
+add a newline:</p>
+<pre><code>&gt; print(s)
+hallo!
+
+&gt;  -- Editor's note: the next Lua prompt is here.
+</code></pre>
+<p><code>io.write</code> also accepts multiple parameters.
+If it takes a number as an input, then it converts that to a string;
+otherwise it only accepts strings.
+It concatenates multiple parameters together without any spaces
+between them, and never adds a newline at the end, like that:</p>
+<pre><code>&gt; io.write('pi is ', 'close to ', 3.14)
+pi is close to 3.14&gt;  -- Editor's note: the &gt; is Lua's input prompt.
+</code></pre>      </section>
+    </div>
+
+    
+  </body>
+</html>

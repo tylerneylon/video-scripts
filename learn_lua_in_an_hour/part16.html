@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Video Scripts by tylerneylon</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <a href="index.html"><h1>Learn Lua in an Hour</h1></a>
+        <h2>Tables as classes</h2>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+<!-- 16.1 intro -->
+
+<p>Now let's talk about using tables as classes.</p>
+<p>Lua doesn't directly contain classes, but it's
+easy to use tables in an object-oriented way.
+When I talk about classes in Lua, I just mean
+tables used so that they
+combine data and behavior in one place, and
+where inheritance is possible.</p>
+<p>When you treat a table as a class instance, you
+want to make sure that method calls have access
+to the instance. In C++ you would use the <code>this</code>
+pointer; in Python you would use <code>self</code>.
+Lua also uses a parameter called <code>self</code>.</p>
+<p>I'm using the word <em>method</em> even though
+Lua itself doesn't distinguish between functions
+and methods - Lua sees them all as functions.
+So when I say the word <em>method</em> what I mean is:
+a regular Lua function that meets two conditions.</p>
+<p>Condition 1: It's a value in a table used as a class. And,</p>
+<p>Condition 2: It expects its first input to be a <code>self</code> parameter when it's called.</p>
+<p>This will all become more clear with examples.</p>
+<!-- 16.2 colon syntax -->
+
+<p>Now is a good time to explain colon syntax for
+function definitions and function calls.</p>
+<p>The main purpose of colon syntax is to make it easier
+to define and call methods on tables used as classes.</p>
+<p>Here's how we can define a method using regular syntax:</p>
+<pre><code>&gt; t = {mynum = 343}
+&gt; function t.f(self) print(self.mynum) end
+</code></pre>
+<p>We can call the method like this:</p>
+<pre><code>&gt; t.f(t)
+343
+</code></pre>
+<p>When you're defining a function in a table, using a colon
+instead of a period inserts a first input parameter called
+<code>self</code>.</p>
+<pre><code>&gt; function t:g() print(self.mynum) end
+</code></pre>
+<p>So <code>g</code> and <code>f</code> are essentially the same.</p>
+<p>When you call a function in a table, using a colon inserts
+the table as the first parameter value passed to the function.
+So this:</p>
+<pre><code>&gt; t:g()
+343
+</code></pre>
+<p>is the same as this:</p>
+<pre><code>&gt; t.g(t)
+343
+</code></pre>
+<p>That's everything about colon syntax.</p>
+<!-- 16.3 constructors -->
+
+<p>Let's make some example classes.</p>
+<p>I'll make two classes. The first is a class that
+can print out values from a sequence of numbers that
+increase by 2 with each step.
+After that, we'll make a subclass based on the
+sequence of square numbers.</p>
+<p>First I'll type out a constructor, then I'll use it,
+and then I'll explain what each line does.</p>
+<pre><code>&gt;  Sequence = {}
+&gt;  function Sequence:new()
+&gt;&gt;   local new_seq = {last_num = 0}
+&gt;&gt;   self.__index = self
+&gt;&gt;   return setmetatable(new_seq, self)
+&gt;&gt; end
+</code></pre>
+<p>We can use this to get a new Sequence instance
+like this:</p>
+<pre><code>&gt; seq = Sequence:new()
+</code></pre>
+<p>The first constructor line creates a new table that
+will be the returned instance. The second line makes
+sure that <code>Sequence</code> itself has an <code>__index</code> key
+pointing to itself. The purpose of this is to make
+<code>Sequence</code> useful as a metatable where instances
+will find their methods. The last line sets
+<code>Sequence</code> as the metatable for the new instance
+and returns the new instance.</p>
+<!-- 16.4 methods -->
+
+<p>So now we have a constructor and an instance, but
+we can't actually do anything yet with the instance.
+Let's change that by defining a couple methods on
+the class.</p>
+<p>The <code>next</code> method returns the next number in the
+sequence. It doesn't change the state of any
+variables, though.</p>
+<pre><code>&gt;  function Sequence:next()
+&gt;&gt;   return self.last_num + 2
+&gt;&gt; end
+</code></pre>
+<p>The <code>forward</code> method does change the state of
+the sequence by moving forward a given number
+of steps. It calls the <code>next</code> method to find out
+which number is next as it takes each step.</p>
+<pre><code>&gt;  function Sequence:forward(n)
+&gt;&gt;   for i = 1, n do
+&gt;&gt;     self.last_num = self:next()
+&gt;&gt;     print(self.last_num)
+&gt;&gt;   end
+&gt;&gt; end
+</code></pre>
+<p>Now I can print out some values in the sequence
+like this:</p>
+<pre><code>&gt; seq:forward(5)
+2
+4
+6
+8
+10
+</code></pre>
+<!-- 16.5 inheritance -->
+
+<p>Now for something interesting.</p>
+<p>We defined the <code>forward</code> method in a nice general
+way, so that it doesn't actually know anything about
+the sequence. It just calls the <code>next</code> method, which
+encapsulates the order of the sequence.</p>
+<p>So we can make a subclass that prints out a
+different sequence by overriding the <code>next</code> method.
+Let's do that for square numbers.</p>
+<pre><code>&gt;  Squares = Sequence:new()
+&gt;  function Squares:next()
+&gt;&gt;   local root = math.sqrt(self.last_num) + 1
+&gt;&gt;   return root * root
+&gt;&gt; end
+</code></pre>
+<p><code>Squares</code> is a subclass, so it may be surprising to see
+that it begins life as an instance of <code>Sequence</code>. This
+is actually a nice way to implement inheritance in Lua.
+It works because classes and instances are all just
+tables, and instance behavior is based entirely on
+metatables. In a minute I'll show a diagram that
+illustrates the relationship between the <code>Square</code>
+and <code>Sequence</code> tables.</p>
+<p>Here is how we can use the <code>Square</code> subclass:</p>
+<pre><code>&gt; sq = Squares:new()
+&gt; sq:forward(5)
+1
+4
+9
+16
+25
+</code></pre>
+<p>Yay, it works.</p>
+<p>Now let's take a look at a class diagram.</p>
+<!-- switch to slide view -->
+
+<p>This focuses on the three tables <code>sq</code>, <code>Squares</code>,
+and <code>Sequence</code>.</p>
+<p>We're thinking of <code>Sequence</code> and <code>Squares</code> as
+classes because they have access to a constructor and
+the <code>forward</code> and <code>next</code> methods.</p>
+<p>When we look up a key on <code>sq</code>, Lua will use the first
+value it finds in the metatable chain. So calling
+<code>sq:next</code> will call the <code>next</code> method associated with
+<code>Squares</code> and not the one associated with <code>Sequence</code>,
+even though <code>forward</code> itself is defined in the
+<code>Sequence</code> table.</p>
+<!-- next slide -->
+
+<p>It's interesting to carefully consider a call to
+<code>sq:forward</code>, because somehow the <code>forward</code> method
+has to know to call the version of <code>next</code> in
+<code>Squares</code> and not the version in <code>Sequence</code>.</p>
+<!-- next slide -->
+
+<p>First, Lua finds the <code>forward</code> key defined in
+<code>Sequence</code> by looking up the metatable chain.</p>
+<!-- next slide -->
+
+<p>Then <code>forward</code> makes a call to <code>self:next</code>.</p>
+<p>What is the value of <code>self</code>? It's set to <code>sq</code>.
+So when <code>forward</code> calls <code>self:next</code>,
+Lua again begins the lookup starting at the bottom
+of the metatable chain, with <code>sq</code> itself.</p>
+<p>So any methods defined in <code>Squares</code> get to override
+methods defined in superclasses like <code>Sequence</code>.</p>
+<p>This is how single inheritance works in Lua.</p>
+<p>It's also possible to use multiple inheritance in Lua,
+which is where a class may have more than one
+immediate superclass. I won't cover this in detail,
+but I'll mention that the key idea is to use a function
+as a metatable's <code>__index</code> value instead of a table.</p>      </section>
+    </div>
+
+    
+  </body>
+</html>
