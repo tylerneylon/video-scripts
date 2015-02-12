@@ -1,4 +1,4 @@
-## 13 - error handling
+## 13 - Error handling
 
 <!-- 13.1 error categories and the error function -->
 

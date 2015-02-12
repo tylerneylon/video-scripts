@@ -1,4 +1,4 @@
-## 9 - pairs and ipairs
+## 9 - Pairs and ipairs
 
 <!-- 9.1 pairs -->
 

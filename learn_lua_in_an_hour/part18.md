@@ -1,4 +1,4 @@
-## 18 - adding a subclass
+## 18 - Adding a subclass
 
 Now I'd like to extend the functionality of this script
 by being able to optionally draw the x-axis and the y-axis.

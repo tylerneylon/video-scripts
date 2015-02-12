@@ -1,4 +1,4 @@
-## 17 - the lgraph example
+## 17 - The lgraph example
 
 At this point, I've actually covered all of the Lua material
 that I wanted to cover in this video. But I'd like to end

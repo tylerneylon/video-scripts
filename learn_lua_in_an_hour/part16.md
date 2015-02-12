@@ -1,4 +1,4 @@
-## 16 - tables as classes
+## 16 - Tables as classes
 
 <!-- 16.1 intro -->
 

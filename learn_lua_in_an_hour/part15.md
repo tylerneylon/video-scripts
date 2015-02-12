@@ -1,4 +1,4 @@
-## 15 - metatables
+## 15 - Metatables
 
 <!-- 15.1 metatable intro -->
 
