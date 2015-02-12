@@ -11,7 +11,7 @@ It's a table that has some functions as some of its values.
 
 It's part of the standard library, and
 if you're using Lua from an embedded app, such as a game, the
-developers may have chosen to exclude some of the modules of the
+developers may have chosen to exclude some of the
 modules of the standard library - or all of them -
 for security reasons, probably.
 So it's not guaranteed that you have access to these functions.
