@@ -1,4 +1,4 @@
-## 4 - Operators & Flexible Assignment
+## 4 - Operators and Flexible Assignment
 
 Let's talk about operators.
 
