@@ -50,9 +50,16 @@ You can use your favorite text editor to
 type in a Lua script. Then you can type at the shell
 `lua` 
 and then the name of your script file, and it will execute it.
+*[Example lua script below.]*
 
 If you know the absolute path of your Lua interpreter, then
 you can insert a first line of the form `#!` followed by the
 absolute path of your interpreter.
 Make sure that your file has execute permissions. Then you
 can execute that file directly.
+
+    -- Contents of example lua file:
+
+    #!/usr/local/bin/lua
+    print('yoyo')
+
