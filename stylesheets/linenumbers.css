@@ -1,0 +1,24 @@
+pre .line-number {
+  font: normal normal 14px "Courier New", Courier, Monospace;
+  line-height: 1.5;
+  color: black;
+  display: block;
+}
+
+pre .line-number {
+  float: left;
+  margin: 0 1em 0 -1em;
+  border-right: 1px solid;
+  text-align: right;
+}
+
+pre .line-number span {
+  display: block;
+  padding: 0 .5em 0 1em;
+  color: #B5E853;
+}
+
+pre .cl {
+  display: block;
+  clear: both;
+}
