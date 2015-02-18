@@ -17,12 +17,24 @@ I'll begin with a hash-bang (`#!`) string so that I
 can call it directly from the shell without having to
 consciously use the Lua interpreter.
 
+    -- Line 1:
+     #!/usr/local/bin/lua
+
 <!-- 0:44 -->
 
 I'm going to start with a multiline string here, which
 is a usage string.
 I like to do this because programmers looking at the script
 can see the usage right away at the top of the file.
+
+    -- Line 2:
+    usage_str = [[
+    Usage:
+      lgraph 'function of x'
+    
+    Example:
+      lgraph 'x^2'
+    ]]
 
 It's assigned also to a global variable which I can later use
 to print out to the user what's going on.
@@ -33,6 +45,18 @@ that I'm going to start with the highest conceptual-level
 thing happening and define more-and-more detailed pieces as
 I need them.
 
+    -- Line 10:
+    -- Supporting functions.
+
+    -- Line 24:
+    -- Define the Grapher class.
+
+    -- Line 63:
+    -- Parse command-line arguments.
+
+    -- Line 70:
+    -- Graph the input.
+
 <!-- 1:27 -->
 
 I'm going to define a class called `Grapher`.
@@ -41,9 +65,23 @@ class, and I will call this `graph` method on it with `arg[1]`.
 `arg` is a special built-in variable name that the interpreter
 populates with the strings we get from the command line.
 
+    -- Line 70:
+    -- Graph the input.
+
+    g = Grapher:new()
+    g:graph(arg[1])
+
 To be nice to the user, if they have not given us an equation
 to graph, instead of just having a horrible failure, we'll
 print out the usage string. And we'll exit politely.
+
+    -- Line 63:
+    -- Parse command-line arguments.
+
+    if not arg[1] or (arg[1] == '-a' and not arg[2]) then
+      print(usage_str)
+      os.exit(0)
+    end
 
 Now we're ready to define the `Grapher` class itself.
 
@@ -53,11 +91,21 @@ I'll define my `x` window, my `y` window, number of columns
 in ascii to print out, number of rows as well.
 I'll just hard code them for now because it's simple to do.
 
+    -- Line 24:
+    -- Define the Grapher class.
+
+    Grapher = {xmin = -1, xmax = 1, ymin = -1, ymax = 1, ncols = 80, nrows = 40}
+
 Here is a constructor.
 We'll make a local table.
 I have to make sure the `__index` key is set to `self`.
 And I'm going to return the new instance with `self` set
 as the metatable.
+
+    -- Line 28:
+    function Grapher:new ()
+      return setmetatable({}, {__index = self})
+    end
 
 <!-- 2:50 -->
 
@@ -65,6 +113,18 @@ Now we're ready to define this key function - the `graph`
 function, which receives an equation (`eqn`) string as input.
 I'm going delegate a lot of my work to this `setup_char_table`
 method that I have *not* written yet. I will write it.
+
+    -- Line 52:
+    function Grapher:graph(eqn)
+      self:setup_char_table(eqn)
+
+      for row = 1, self.nrows do
+        for col = 1, self.ncols do
+          io.write(self.char[col][row] or ' ')
+        end
+        io.write('\n')
+      end
+    end
 
 The idea there is that I have this `self.char` table, which is
 sort of like a two-dimensional array, conceptually.
@@ -82,6 +142,11 @@ That's the complete `graph` function.
 Really, it's not doing any intelligent work, because I've
 delegated it all to this `setup_char_table` function, which
 is going to do the real work here.
+
+    -- Line 32:
+    -- Makes a map self.char[col][row] = <nil or character to print>.
+    function Grapher:setup_char_table(eqn)
+      local f = loadstring('local x = ...; return ' .. eqn)
 
 This line is probably going to be the most single integesting
 line because it's going to do the most nontrivial work in the
@@ -117,6 +182,14 @@ A very insecure graphing calculator.
 
 But, a graphing calculator nonetheless.
 
+    -- Line 36:
+    -- This will be a table of tables so that self.char[col][row] is either
+    -- nil or the character to print at that location.
+    self.char = {}
+
+    local y_to_row = range_mapper(self.ymin, self.ymax, self.nrows, 1)
+    local col_to_x = range_mapper(1, self.ncols, self.xmin, self.xmax)
+
 I have not yet written the function `range_mapper`.
 But I will.
 
@@ -133,6 +206,16 @@ Essentially, what I want to do here, is I want to set
 `self.char[col][row]` to be equal to `'o'`. It may be the case that
 `self.char[col][row]` can't be set yet because this value
 (`self.char[col]`) could be `nil`.
+
+    -- Line 43:
+      for col = 1, self.ncols do
+        local y = f(col_to_x(col))
+        local row = round(y_to_row(y))
+
+        if self.char[col] == nil then self.char[col] = {} end
+        self.char[col][row] = 'o'
+      end
+    end
 
 <!-- 6:32 -->
 
@@ -151,6 +234,11 @@ One is called `round`, which is easy.
 This is just going to round to the nearest integer, which is
 the same as taking the floor of `x + 0.5`.
 
+    -- Line 12:
+    local function round(x)
+      return math.floor(x + 0.5)
+    end
+
 Now this function, `range_mapper`, because it's going to
 *return* a function that I have to make on the fly.
 Conceptually, what I'm going to do is calculate this percentage
@@ -158,6 +246,15 @@ that the input is from `a1`. The input is a number in the range
 `a1` to `b1`. I'm going to turn that into a percentage. Then
 I'm going to return that percentage converted into the
 `a2` to `b2` range.
+
+    -- Line 16:
+    -- This returns a *function* that maps [a1, b1] to [a2, b2].
+    local function range_mapper(a1, b1, a2, b2)
+      return function (x)
+        local perc_from_a = (x - a1) / (b1 - a1)
+        return a2 + (b2 - a2) * perc_from_a
+      end
+    end
 
 Ok.
 
