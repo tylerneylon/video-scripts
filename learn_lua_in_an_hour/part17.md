@@ -17,6 +17,15 @@ I'll begin with a hash-bang (`#!`) string so that I
 can call it directly from the shell without having to
 consciously use the Lua interpreter.
 
+*[Editor's note: In this part of the script, the code
+blocks have line numbers since the script describes
+different sections of the code out of order. The entire
+Lua script is on this page (in pieces); any missing line
+numbers are for blank lines.
+The source for this Lua script, with modifications from
+the next part of the tutorial, is
+[here](https://github.com/tylerneylon/video-scripts/blob/master/learn_lua_in_an_hour/lgraph).]*
+
     -- Line 1:
      #!/usr/local/bin/lua
 
