@@ -48,11 +48,17 @@ I need them.
     -- Line 10:
     -- Supporting functions.
 
+<!-- These comments force markdown to give us separate code blocks. -->
+
     -- Line 24:
     -- Define the Grapher class.
 
+<!-- Force a separate code block. -->
+
     -- Line 63:
     -- Parse command-line arguments.
+
+<!-- Force a separate code block. -->
 
     -- Line 70:
     -- Graph the input.
