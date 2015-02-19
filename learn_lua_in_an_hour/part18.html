@@ -34,6 +34,25 @@ exactly this way.
 I've set up the base class so that I really just need to override this
 one function - <code>setup_char_table</code> - in order to slightly modify the
 behavior of the base class.</p>
+<pre><code>-- Editor's note: this is a partial diff from the old lua script:
+62a63,78
+&gt; -- Define AxisGrapher, a subclass of Grapher.
+&gt; 
+&gt; AxisGrapher = Grapher:new()
+&gt; 
+&gt; function AxisGrapher:setup_char_table(eqn)
+&gt;   Grapher.setup_char_table(self, eqn)  -- Call super's version.
+&gt; 
+&gt;   -- Draw the y-axis.
+&gt;   local c = round(range_mapper(self.xmin, self.xmax, 1, self.ncols)(0))
+&gt;   for r = 1, self.nrows do self.char[c][r] = '|' end
+&gt; 
+&gt;   -- Draw the x-axis.
+&gt;   local r = round(range_mapper(self.ymin, self.ymax, self.nrows, 1)(0))
+&gt;   for c = 1, self.ncols do self.char[c][r] = '-' end
+&gt; end
+&gt;
+</code></pre>
 <p>What I'm doing here is making the call to the super class's version of
 this method. I have <em>not</em> used colon syntax in that line because I
 want <code>self</code> to be the value of <code>self</code> that I receive in this method
@@ -55,13 +74,32 @@ I can iterate over all columns and this time I'll use a hyphen
 <p>If I'm being careful about parsing the command-line arguments, then
 basically the way I'm going to check if they want to use axes is to
 look for <code>-a</code> as a flag. If they have that flag, then I expect there
-to be another argument, <code>arg[2]</code>.
-I'm going to act differently depending on whether or not the first
+to be another argument, <code>arg[2]</code>.</p>
+<pre><code>-- Another partial diff:
+65c81
+&lt; if not arg[1] then
+---
+&gt; if not arg[1] or (arg[1] == '-a' and not arg[2]) then
+</code></pre>
+<p>I'm going to act differently depending on whether or not the first
 argument is a <code>-a</code>.
 If it is a <code>-a</code>, then my global variable <code>g</code> will be an <code>AxisGrapher</code>
 instance. For convenience here, I'll copy over the math equation to
 graph into <code>arg[1]</code>. From this point on, <code>arg[1]</code> is always the
 equation to graph.</p>
+<pre><code>-- The last partial diff. These are all the diffs between
+-- the last part's Lua script and this part's.
+69a86,92
+&gt; if arg[1] == '-a' then
+&gt;   g = AxisGrapher:new()
+&gt;   arg[1] = arg[2]
+&gt; else
+&gt;   g = Grapher:new()
+&gt; end
+&gt; 
+72d94
+&lt; g = Grapher:new()
+</code></pre>
 <p>If there was no <code>-a</code>, we'll continue to use the original <code>Grapher</code>
 class for the instance.</p>
 <p>If I've done everything correctly - great!</p>
