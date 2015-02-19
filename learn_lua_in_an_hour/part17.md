@@ -154,7 +154,7 @@ is going to do the real work here.
     function Grapher:setup_char_table(eqn)
       local f = loadstring('local x = ...; return ' .. eqn)
 
-This line is probably going to be the most single integesting
+This line is probably going to be the single most interesting
 line because it's going to do the most nontrivial work in the
 program.
 What I'm going to do is parse and compile `eqn` as, basically,
