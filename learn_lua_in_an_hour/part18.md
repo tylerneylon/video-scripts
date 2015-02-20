@@ -94,5 +94,70 @@ class for the instance.
 
 If I've done everything correctly - great!
 
+    $ lgraph -a x
+                                      |                               oo
+                                      |                             oo  
+                                      |                           oo    
+                                      |                        ooo      
+                                      |                      oo         
+                                      |                    oo           
+                                      |                 ooo             
+                                      |               oo                
+                                      |             oo                  
+                                      |           oo                    
+                                      |        ooo                      
+                                      |      oo                         
+                                      |    oo                           
+                                      | ooo                             
+                                      |o                                
+    --------------------------------------------------------------------
+                                 ooo  |                                 
+                               oo     |                                 
+                             oo       |                                 
+                          ooo         |                                 
+                        oo            |                                 
+                      oo              |                                 
+                    oo                |                                 
+                 ooo                  |                                 
+               oo                     |                                 
+             oo                       |                                 
+          ooo                         |                                 
+        oo                            |                                 
+      oo                              |                                 
+    oo                                |                                 
+
 I can even edit this instance here (the bash line) - there we go!
+
+    $ lgraph -a 'math.sin(10 * x) / 3 + math.cos(3 * x) / 2'
+                                      |                                 
+                                      |                                 
+                                      |                                 
+                                      |  ooo                            
+                                      | o   o                           
+                                      |o     o                          
+                                      |                                 
+                                      |       o                         
+                      ooo            o|        o                        
+                     o   oo         o |                                 
+                    o      o          |         o                       
+                            o      o  |                                 
+                   o         o    o   |          o                      
+                              oooo    |                                 
+                  o                   |           o                     
+    --------------------------------------------------------------------
+                 o                    |            o       oo    o      
+                                      |             o     o       o     
+                o                     |              o  oo         o    
+    o                                 |               oo                
+     o         o                      |                             o   
+      o       o                       |                              o  
+                                      |                                 
+       o     o                        |                               o 
+        oo  o                         |                                o
+          oo                          |                                 
+                                      |                                 
+                                      |                                 
+                                      |                                 
+                                      |                         
+
 There's our axes.
