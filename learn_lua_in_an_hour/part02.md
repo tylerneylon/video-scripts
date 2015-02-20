@@ -1,4 +1,4 @@
-## 2 - Docs, Installation, and the Interpreter
+## 2 - Docs, installation, and the interpreter
 
 Let's get started with the docs and how to install Lua.
 The official site is [lua.org](http://www.lua.org/).
@@ -10,7 +10,8 @@ The first edition is available online.
 You can read the entire thing for free.
 It's useful, but it covers an older version of the language.
 
-Another great resource is the reference manual. This is
+Another great resource is the
+[reference manual](http://www.lua.org/manual/5.3/). This is
 basically a set of man pages for Lua. It covers
 the C API, the standard library, and all of the core language itself.
 It's not a great way to learn,

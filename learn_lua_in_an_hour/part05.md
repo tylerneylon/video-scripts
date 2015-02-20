@@ -1,4 +1,4 @@
-## 5 - Tables and Print
+## 5 - Tables and print
 
 <!-- 5.1 tables: intro -->
 
