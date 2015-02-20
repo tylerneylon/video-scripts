@@ -284,14 +284,127 @@ Let's see ... `perc_from_a1`.
 
 There we go! Great! Only two typos... so far.
 
+    $ lgraph x
+                                                                      oo
+                                                                    oo  
+                                                                  oo    
+                                                               ooo      
+                                                             oo         
+                                                           oo           
+                                                        ooo             
+                                                      oo                
+                                                    oo                  
+                                                  oo                    
+                                               ooo                      
+                                             oo                         
+                                           oo                           
+                                        ooo                             
+                                      oo                                
+                                    oo                                  
+                                 ooo                                    
+                               oo                                       
+                             oo                                         
+                          ooo                                           
+                        oo                                              
+                      oo                                                
+                    oo                                                  
+                 ooo                                                    
+               oo                                                       
+             oo                                                         
+          ooo                                                           
+        oo                                                              
+      oo                                                                
+    oo                                                                  
+
 Let's make a more interesting graph here.
+
+    $ lgraph 'x^2 - 0.5'
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+    o                                                                  o
+     o                                                                o 
+      o                                                              o  
+       o                                                            o   
+        oo                                                        oo    
+          o                                                      o      
+           oo                                                  oo       
+             o                                                o         
+              oo                                            oo          
+                oo                                        oo            
+                  oo                                    oo              
+                    oo                                oo                
+                      ooo                          ooo                  
+                         ooo                    ooo                     
+                            oooooo        oooooo                        
+                                  oooooooo                              
 
 Sweet, there's a parabola.
 
 Let's do one of my favorites - let's do a little trig.
 
+    $ lgraph 'math.sin(3 * x)'
+                                                     ooooo              
+                                                  ooo     ooo           
+                                                 o           o          
+                                                o             o         
+                                              oo               oo       
+                                             o                   o      
+                                                                  o     
+                                            o                           
+                                           o                       o    
+                                          o                         o   
+                                         o                           o  
+                                        o                             o 
+                                                                       o
+                                       o                                
+                                      o                                 
+                                     o                                  
+                                    o                                   
+    o                                                                   
+     o                             o                                    
+      o                           o                                     
+       o                         o                                      
+        o                       o                                       
+                               o                                        
+         o                                                              
+          o                   o                                         
+           oo               oo                                          
+             o             o                                            
+              o           o                                             
+               ooo     ooo                                              
+                  ooooo                              
+
 Aw, yea, that's looking good.
 
 Something even more interesting.
 Here's a nice trig function.
+
+    $ lgraph 'math.sin(6 * x) / 3 + math.cos(2 * x) / 2'
+                                                                        
+                                                                        
+                                                                        
+                                            ooo                         
+                                          oo   oo                       
+                                        oo       oo                     
+                                       o           o                    
+                                      o             o                   
+                                     o               o                  
+            ooooo                  oo                                   
+          oo     ooo              o                   o                 
+         o          oo           o                     o                
+        o             oo       oo                       o               
+       o                ooooooo                          o              
+      o                                                   o             
+     o                                                                  
+    o                                                      o            
+                                                            o           
+                                                             oo         
+                                                               oo     oo
+                                                                 ooooo  
+
 I like that.
