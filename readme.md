@@ -1,5 +1,8 @@
 # video-scripts
 
+The content of this repo can be read from its
+[github.io page](http://tylerneylon.github.io/video-scripts/).
+
 For now, this contains the script for a single video, *Learn Lua in an Hour*.
 
 I made a git repo for video scripts because I'd like to invite people to collaboratively
