@@ -268,42 +268,157 @@ way, so let's take a look at those typos.</p>
 <p>Let's try this again.</p>
 <p>Let's see ... <code>perc_from_a1</code>.</p>
 <p>There we go! Great! Only two typos... so far.</p>
+<pre><code>$ lgraph x
+                                                                  oo
+                                                                oo  
+                                                              oo    
+                                                           ooo      
+                                                         oo         
+                                                       oo           
+                                                    ooo             
+                                                  oo                
+                                                oo                  
+                                              oo                    
+                                           ooo                      
+                                         oo                         
+                                       oo                           
+                                    ooo                             
+                                  oo                                
+                                oo                                  
+                             ooo                                    
+                           oo                                       
+                         oo                                         
+                      ooo                                           
+                    oo                                              
+                  oo                                                
+                oo                                                  
+             ooo                                                    
+           oo                                                       
+         oo                                                         
+      ooo                                                           
+    oo                                                              
+  oo                                                                
+oo
+</code></pre>
 <p>Let's make a more interesting graph here.</p>
+<pre><code>$ lgraph 'x^2 - 0.5'
+
+
+
+
+
+
+
+o                                                                  o
+ o                                                                o 
+  o                                                              o  
+   o                                                            o   
+    oo                                                        oo    
+      o                                                      o      
+       oo                                                  oo       
+         o                                                o         
+          oo                                            oo          
+            oo                                        oo            
+              oo                                    oo              
+                oo                                oo                
+                  ooo                          ooo                  
+                     ooo                    ooo                     
+                        oooooo        oooooo                        
+                              oooooooo
+</code></pre>
 <p>Sweet, there's a parabola.</p>
 <p>Let's do one of my favorites - let's do a little trig.</p>
+<pre><code>$ lgraph 'math.sin(3 * x)'
+                                                 ooooo              
+                                              ooo     ooo           
+                                             o           o          
+                                            o             o         
+                                          oo               oo       
+                                         o                   o      
+                                                              o     
+                                        o                           
+                                       o                       o    
+                                      o                         o   
+                                     o                           o  
+                                    o                             o 
+                                                                   o
+                                   o                                
+                                  o                                 
+                                 o                                  
+                                o                                   
+o                                                                   
+ o                             o                                    
+  o                           o                                     
+   o                         o                                      
+    o                       o                                       
+                           o                                        
+     o                                                              
+      o                   o                                         
+       oo               oo                                          
+         o             o                                            
+          o           o                                             
+           ooo     ooo                                              
+              ooooo
+</code></pre>
 <p>Aw, yea, that's looking good.</p>
 <p>Something even more interesting.
-Here's a nice trig function.
-I like that.</p><a href="part18.html" style="float:right">Next</a>
+Here's a nice trig function.</p>
+<pre><code>$ lgraph 'math.sin(6 * x) / 3 + math.cos(2 * x) / 2'
+
+
+
+                                        ooo                         
+                                      oo   oo                       
+                                    oo       oo                     
+                                   o           o                    
+                                  o             o                   
+                                 o               o                  
+        ooooo                  oo                                   
+      oo     ooo              o                   o                 
+     o          oo           o                     o                
+    o             oo       oo                       o               
+   o                ooooooo                          o              
+  o                                                   o             
+ o                                                                  
+o                                                      o            
+                                                        o           
+                                                         oo         
+                                                           oo     oo
+                                                             ooooo
+</code></pre>
+<p>I like that.</p><a href="part18.html" style="float:right">Next</a>
       </section>
     </div>
 
- <script>
-   var pre = document.getElementsByTagName('pre');
-   var pl = pre.length;
-   for (var i = 0; i < pl; i++) {
-     var code = pre[i].innerHTML;
-     var code_lines = code.split('\n');
-     var m = code_lines[0].match(/\s*-- Line (\d+):$/);
-     var first_line_num = 1;
-     if (m) {
-       first_line_num = parseInt(m[1]);
-       code_lines.shift();
-     }
-     code_lines.pop();  // Drop the last line.
-     var num = code_lines.length;
-     pre[i].innerHTML = code_lines.join('\n');
+  <script>
+    var pre = document.getElementsByTagName('pre');
+    var pl = pre.length;
+    for (var i = 0; i < pl; i++) {
+      var code = pre[i].innerHTML;
+      var code_lines = code.split('\n');
+      var m = code_lines[0].match(/\s*-- Line (\d+):$/);
+      var first_line_num = 1;
  
-     console.log('innerHTML set to:\n', pre[i].innerHTML);
+      // Don't add line numbers unless they're requested.
+      if (!m) continue;
  
-     pre[i].innerHTML = '<span class="line-number"></span>' + pre[i].innerHTML + '<span class="cl"></span>';
-     var num = pre[i].innerHTML.split(/\n/).length;
-     for (var j = 0; j < num; j++) {
-       var line_num = pre[i].getElementsByTagName('span')[0];
-       line_num.innerHTML += '<span>' + (first_line_num + j) + '</span>';
-     }
-   }
- </script>
+      first_line_num = parseInt(m[1]);
+      code_lines.shift();  // Drop the first (line-number-requesting) line.
+      code_lines.pop();    // Drop the last (empty) line.
+ 
+      var num = code_lines.length;
+      pre[i].innerHTML = code_lines.join('\n');
+  
+      console.log('innerHTML set to:\n', pre[i].innerHTML);
+  
+      pre[i].innerHTML = '<span class="line-number"></span>' + pre[i].innerHTML + '<span class="cl"></span>';
+      var num = pre[i].innerHTML.split(/\n/).length;
+      for (var j = 0; j < num; j++) {
+        var line_num = pre[i].getElementsByTagName('span')[0];
+        line_num.innerHTML += '<span>' + (first_line_num + j) + '</span>';
+      }
+    }
+  </script>
     
   </body>
 </html>
