@@ -409,8 +409,6 @@ o                                                      o
       var num = code_lines.length;
       pre[i].innerHTML = code_lines.join('\n');
   
-      console.log('innerHTML set to:\n', pre[i].innerHTML);
-  
       pre[i].innerHTML = '<span class="line-number"></span>' + pre[i].innerHTML + '<span class="cl"></span>';
       var num = pre[i].innerHTML.split(/\n/).length;
       for (var j = 0; j < num; j++) {
