@@ -16,3 +16,10 @@ Here are links to the
 that I have.
 
 Thanks again for watching!
+
+---
+
+*I'm using Lua to build an independent game called Apanga.
+ If you like games, check out [apanga.net](http://apanga.net/).
+ If you don't like games, then you are still allowed to check
+ it out.*
