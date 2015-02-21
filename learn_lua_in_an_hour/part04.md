@@ -84,7 +84,7 @@ it doesn't even bother to evaluate the rest of the expressions, like that:
     false
 
 I'll quickly mention how you can work with binary operators.
-Lua 5.2 has a module called `bit32` module which offers them as functions.
+Lua 5.2 has a `bit32` module which offers them as functions.
 Lua 5.3 actually adds these operators to the language itself.
 
 Lua supports assignments with multiple variables on the left and

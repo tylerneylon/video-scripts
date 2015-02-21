@@ -34,7 +34,7 @@ the keys:
 
 If I only care about the values, then I do need to use two
 loop variables, but, as a convention to other programmers,
-I can set an underscore `_` as the first loop variable.
+I can set an underscore (`_`) as the first loop variable.
 This indicates that I don't really care about the value stored
 in the underscore variable.
 

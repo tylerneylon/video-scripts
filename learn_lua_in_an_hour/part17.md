@@ -93,7 +93,7 @@ print out the usage string. And we'll exit politely.
     -- Line 63:
     -- Parse command-line arguments.
 
-    if not arg[1] or (arg[1] == '-a' and not arg[2]) then
+    if not arg[1] then
       print(usage_str)
       os.exit(0)
     end
@@ -175,7 +175,7 @@ Completely insecure code.
 Security vulnerabilities there.
 Let's pretend the user is a very friendly, nice person.
 
-Let me explain this `...` notation, because this might be
+Let me explain this "`...`" notation, because this might be
 confusing.
 When Lua compiles something using `load` or `loadstring`,
 `...` is sort of like a macro that expands to be all the
@@ -227,7 +227,7 @@ Essentially, what I want to do here, is I want to set
         local y = f(col_to_x(col))
         local row = round(y_to_row(y))
 
-        if self.char[col] == nil then self.char[col] = {} end
+        self.char[col] = {}
         self.char[col][row] = 'o'
       end
     end
@@ -243,8 +243,8 @@ Ok, great.
 
 I've done everything except for these two supporting functions
 that I haven't defined yet, but that I've used.
-I've actually used two functions that I haven't defined yet.
 
+I've actually used two functions that I haven't defined yet.
 One is called `round`, which is easy.
 This is just going to round to the nearest integer, which is
 the same as taking the floor of `x + 0.5`.
@@ -254,7 +254,8 @@ the same as taking the floor of `x + 0.5`.
       return math.floor(x + 0.5)
     end
 
-Now this function, `range_mapper`, because it's going to
+Now this function, `range_mapper`, is a little more interesting
+because it's going to
 *return* a function that I have to make on the fly.
 Conceptually, what I'm going to do is calculate this percentage
 that the input is from `a1`. The input is a number in the range
@@ -266,8 +267,8 @@ I'm going to return that percentage converted into the
     -- This returns a *function* that maps [a1, b1] to [a2, b2].
     local function range_mapper(a1, b1, a2, b2)
       return function (x)
-        local perc_from_a = (x - a1) / (b1 - a1)
-        return a2 + (b2 - a2) * perc_from_a
+        local perc_from_a1 = (x - a1) / (b1 - a1)
+        return a2 + (b2 - a2) * perc_from_a1
       end
     end
 
@@ -275,6 +276,10 @@ Ok.
 
 There's a very good chance that I've made some typos along the
 way, so let's take a look at those typos.
+
+*[Editor's note: the remarks below are about fixing two typing
+mistakes that have been left out of the code blocks you see
+on this page.]*
 
 I forgot to write the word `set` there.
 
