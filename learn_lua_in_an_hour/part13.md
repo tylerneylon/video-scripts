@@ -113,6 +113,8 @@ into return-value errors.
 I like to think of it as a sort of inverse of the
 `assert` function.
 
+![](https://raw.githubusercontent.com/tylerneylon/video-scripts/master/learn_lua_in_an_hour/img/slide2.png)
+
 <!-- 13.4 the xpcall function -->
 
 There's another built-in function called `xpcall` which

@@ -182,7 +182,7 @@ Yay, it works.
 
 Now let's take a look at a class diagram.
 
-<!-- switch to slide view -->
+![](https://raw.githubusercontent.com/tylerneylon/video-scripts/master/learn_lua_in_an_hour/img/slide3.png)
 
 This focuses on the three tables `sq`, `Squares`,
 and `Sequence`.
@@ -218,6 +218,8 @@ What is the value of `self`? It's set to `sq`.
 So when `forward` calls `self:next`,
 Lua again begins the lookup starting at the bottom
 of the metatable chain, with `sq` itself.
+
+![](https://raw.githubusercontent.com/tylerneylon/video-scripts/master/learn_lua_in_an_hour/img/slide4.png)
 
 So any methods defined in `Squares` get to override
 methods defined in superclasses like `Sequence`.

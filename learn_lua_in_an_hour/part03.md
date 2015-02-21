@@ -5,6 +5,8 @@ Lua also runs from embedded apps.
 
 Let's talk about types.
 
+![](https://raw.githubusercontent.com/tylerneylon/video-scripts/master/learn_lua_in_an_hour/img/slide1.png)
+
 These are all 8 types in Lua.
 I'll mainly talk about these 6 highlighted types in this video.
 
