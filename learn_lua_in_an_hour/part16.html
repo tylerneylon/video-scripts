@@ -172,8 +172,7 @@ and <code>Sequence</code> tables.</p>
 </code></pre>
 <p>Yay, it works.</p>
 <p>Now let's take a look at a class diagram.</p>
-<!-- switch to slide view -->
-
+<p><img alt="" src="https://raw.githubusercontent.com/tylerneylon/video-scripts/master/learn_lua_in_an_hour/img/slide3.png" /></p>
 <p>This focuses on the three tables <code>sq</code>, <code>Squares</code>,
 and <code>Sequence</code>.</p>
 <p>We're thinking of <code>Sequence</code> and <code>Squares</code> as
@@ -202,6 +201,7 @@ has to know to call the version of <code>next</code> in
 So when <code>forward</code> calls <code>self:next</code>,
 Lua again begins the lookup starting at the bottom
 of the metatable chain, with <code>sq</code> itself.</p>
+<p><img alt="" src="https://raw.githubusercontent.com/tylerneylon/video-scripts/master/learn_lua_in_an_hour/img/slide4.png" /></p>
 <p>So any methods defined in <code>Squares</code> get to override
 methods defined in superclasses like <code>Sequence</code>.</p>
 <p>This is how single inheritance works in Lua.</p>
