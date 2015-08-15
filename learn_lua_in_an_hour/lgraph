@@ -1,10 +1,10 @@
 #!/usr/local/bin/lua
 usage_str = [[
 Usage:
-  lgraph 'function of x'
+  lgraph "function of x"
 
 Example:
-  lgraph 'x^2'
+  lgraph "x^2"
 ]]
 
 -- Supporting functions.
